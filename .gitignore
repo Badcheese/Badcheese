@@ -1,0 +1,7 @@
+# Mac OS
+.DS_Store
+
+# NPM & Bower
+node_modules
+bower_components
+
