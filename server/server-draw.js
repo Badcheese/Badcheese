@@ -3,21 +3,29 @@ const bodyParser = require('body-parser');
 const handler = require('./helpers/request-handler.js');
 
 const app = express();
-
-// When there is data to store
-// mongoose.connect('mongodb://localhost/drawmie-dev');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Params
-// app.param('param-name', param-handler);
-
-// Routes
-// app.get('/', appropriate-request-handler);
+app.use('/', express.static(__dirname));
 
 // Server Port
-app.listen(3001);
+server.listen(3005, () => {
+  console.log('Server is up!');
+});
+
+// Send test index.html
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', (socket) => {
+  socket.emit('news', { server: 'This message came through socket.io' });
+  socket.on('my other event', (data) => {
+    console.log(data);
+  });
+});
 
 module.exports = app;

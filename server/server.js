@@ -1,8 +1,6 @@
-const express = require('express');
+const app = require('express')();
 const bodyParser = require('body-parser');
 const handler = require('./helpers/request-handler.js');
-
-const app = express();
 
 // When there is data to store
 // mongoose.connect('mongodb://localhost/drawmie-dev');
