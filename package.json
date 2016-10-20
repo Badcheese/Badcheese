@@ -1,0 +1,26 @@
+{
+  "name": "drawmie",
+  "version": "0.0.1",
+  "description": "Collaborative Whiteboard App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archcorsair/Drawmie.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/archcorsair/Drawmie/issues"
+  },
+  "homepage": "https://github.com/archcorsair/Drawmie#readme",
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.4"
+  }
+}
