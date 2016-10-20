@@ -6,6 +6,10 @@ mongoose.Promise = Promise;
 
 module.exports = {
 
-  // method: () => { do stuff },
+  // doGetNewBoard: () => { makes a new board },
+
+  // doGetBoard: () => { gets an existing board },
+
+  // doArchiveBoard: () => { arhives a finished board },
 
 };
