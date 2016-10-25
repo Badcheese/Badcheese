@@ -50,12 +50,23 @@ server.listen(3005, () => {
   console.log('Socket is up!');
 });
 
+// const nsp = io.of('/test');
+
 io.on('connection', (socket) => {
-  socket.emit('news', { serverSays: 'This message came through socket.io' });
-  socket.on('my other event', (data) => {
-    console.log(data);
+  socket.join('test');
+  io.to('test').emit('boardId', { dummy: 'data' });
+  socket.on('clientDrawing', (data) => {
+    console.log('got data from the client');
+    io.to('test').emit('renderme', data);
   });
 });
+
+// io.on('clientDrawing', (data) => {
+//   console.log('got data from the client');
+//   // socket.join('test');
+//   io.to('test').emit('renderme', data);
+// });
+
 
 
 module.exports = app;
