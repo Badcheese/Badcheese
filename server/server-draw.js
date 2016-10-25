@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-  socket.emit('news', { server: 'This message came through socket.io' });
+  socket.emit('news', { serverSays: 'This message came through socket.io' });
   socket.on('my other event', (data) => {
     console.log(data);
   });

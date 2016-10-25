@@ -19,7 +19,7 @@ app.param('boardId', handler.getBoard);
 app.param('archiveId', handler.archiveBoard);
 
 // Routes
-// TODO: Serve index.html from project root?
+// REVIEW: Serve index.html from project root?
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
