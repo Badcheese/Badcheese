@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel='stylesheet' type='text/css' href='styles.css'>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,8 +9,20 @@
 </head>
 <body>
 <h1>Demo</h1>
-<canvas id='board123' height='750' width='1000' class="board" style="border:1px solid #000000;"></canvas>
+
+<canvas id='draw-canvas' width="1000" height="750" style="border:1px solid #000000;" ></canvas>
+<div id='tools'>
+  Tools:
+  <a onclick="drawer.toggleIsSelecting()" href='#'>Select Tool</a>
+  <a onclick="drawer.changeShapeType(ShapeTypes.line)" href='#'>Line</a>
+  <a onclick="drawer.changeShapeType(ShapeTypes.path)" href='#'>Path</a>
+  <a onclick="drawer.changeShapeType(ShapeTypes.rect)" href='#'>Rect</a>
+  <a onclick="drawer.changeShapeType(ShapeTypes.circle)" href='#'>Circle</a>
+</div>
+
+<!-- <canvas id='board123' height='750' width='1000' class="board" style="border:1px solid #000000;"></canvas> -->
 </body>
+<script src='./drawer.js'></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src='./client-socket.js'></script>
 </html>

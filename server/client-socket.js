@@ -1,6 +1,6 @@
 const socket = io();
 
-var canvasId = 'board123';
+var canvasId = 'draw-canvas';
 var width = 1000;
 var height = 750;
 
@@ -13,7 +13,7 @@ var height;
 var width;
 var c;
 
-var localData;
+let localData;
 
 // the render function takes in a data object.
 // Data has a shapes property which is an array
@@ -25,7 +25,8 @@ window.render = function render(canvasId, change) {
   height = canvas.height;
   width = canvas.width;
 
-  loadChange(change);
+  // loadChange(change);
+  localData = change;
 
   addBackground(localData);
 
@@ -221,13 +222,12 @@ var rand = function(mult, add) {
 };
 
 var add = function() {
-  var adder = {shapes: {}};
+  var adder = {shapes: {}, newShapes: []};
   var id;
   var r;
   for (var x = 0; x < 3; x++ ) {
     // localData ? 0 : localData = {shapes: {}};
     // id = rand(localData.next + 1);
-    id = rand(4);
 
     r = rand(5, 1);
     if (r === 1) {
@@ -244,7 +244,7 @@ var add = function() {
 
     r = rand(3, 1);
     if (r === 1) {
-      adder.shapes[id] = {
+      adder.newShapes.push({
         type: 'circle',
         points: [
           {
@@ -254,9 +254,9 @@ var add = function() {
         ],
         strokeColor: color,
         radius: rand(200, 1)
-      };
+      });
     } else if (r === 2) {
-      adder.shapes[id] = {
+      adder.newShapes.push({
         type: 'box',
         points: [
           {
@@ -270,9 +270,9 @@ var add = function() {
         ],
         strokeColor: color,
         // alpha: Math.random() * 2 * Math.PI
-      };
+      });
     } else if (r === 3) {
-      adder.shapes[id] = {
+      adder.newShapes.push({
         type: 'line',
         strokeColor: color,
         points: [
@@ -292,21 +292,19 @@ var add = function() {
         {x: rand(width), y: rand(height)},
         {x: rand(width), y: rand(height)}
         ]
-      };
+      });
     }
 
-    r = rand(6);
-    if (r === 0) {
-      adder.shapes[id].fillColor = adder.shapes[id].strokeColor;
-    }
+    // r = rand(6);
+    // if (r === 0) {
+    //   adder.shapes[id].fillColor = adder.shapes[id].strokeColor;
+    // }
   }
 
-  // render(canvasId, adder);
   socket.emit('clientDrawing', adder);
 };
-
-socket.on('renderme', (data) => {
-  render(canvasId, data);
+socket.on('renderme', (serverData) => {
+  render(canvasId, serverData);
 });
 // socket.on('boardId', (data) => {
 //   console.log(data);

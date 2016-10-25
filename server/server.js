@@ -50,22 +50,37 @@ server.listen(3005, () => {
   console.log('Socket is up!');
 });
 
-// const nsp = io.of('/test');
+let serverData = {
+  color: 'white',
+  shapes: {},
+  next: 0,
+};
+
+const loadChange = (change) => {
+  if (change.color) {
+    serverData.color = change.color;
+  }
+  let clientShapes = change.shapes;
+  let serverShapes = serverData.shapes;
+  for (const shapeId in clientShapes) {
+    serverShapes[shapeId] = clientShapes[shapeId];
+  }
+  if (change.newShapes) {
+    change.newShapes.forEach((shape) => {
+      serverData.shapes[serverData.next] = shape;
+      serverData.next++;
+    });
+  }
+};
 
 io.on('connection', (socket) => {
   socket.join('test');
-  io.to('test').emit('boardId', { dummy: 'data' });
   socket.on('clientDrawing', (data) => {
     console.log('got data from the client');
-    io.to('test').emit('renderme', data);
+    loadChange(data);
+    io.to('test').emit('renderme', serverData);
   });
 });
-
-// io.on('clientDrawing', (data) => {
-//   console.log('got data from the client');
-//   // socket.join('test');
-//   io.to('test').emit('renderme', data);
-// });
 
 
 
