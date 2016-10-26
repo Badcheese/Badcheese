@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const handler = require('./helpers/request-handler.js');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const liveBoard = require('./helpers/liveBoard.js');
 
+const port = 3000;
 // TODO: Will move routes to own module (routes.js)
 // const router = require('.helpers/routes.js');
 
@@ -18,20 +20,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve Static Files for React
 // app.use('/', express.static(path.join(__dirname, '..', 'src')));
-app.use('/', express.static(path.join(__dirname)));
+app.use('/', express.static(path.join(__dirname, '..', 'client')));
 
 
 // Params
 // app.param('boardId', handler.getBoard);
 // app.param('archiveId', handler.archiveBoard);
-
-// Routes
-// REVIEW: Serve index.html from project root?
-app.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, '..', 'index.html'));
-  res.sendFile(path.join(__dirname, 'index.html'));
-
-});
 
 // Create a new board
 // app.get('/board', handler.getNewBoard);
@@ -43,45 +37,15 @@ app.get('/', (req, res) => {
 // app.post('board/:archiveId', handler.archiveBoard);
 
 // Server Port
-// app.listen(3000, () => {
-//   console.log('HTTP is up!');
-// });
-server.listen(3005, () => {
-  console.log('Socket is up!');
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
-
-let serverData = {
-  color: 'white',
-  shapes: {},
-  next: 0,
-};
-
-const loadChange = (change) => {
-  if (change.color) {
-    serverData.color = change.color;
-  }
-  let clientShapes = change.shapes;
-  let serverShapes = serverData.shapes;
-  for (const shapeId in clientShapes) {
-    serverShapes[shapeId] = clientShapes[shapeId];
-  }
-  if (change.newShapes) {
-    change.newShapes.forEach((shape) => {
-      serverData.shapes[serverData.next] = shape;
-      serverData.next++;
-    });
-  }
-};
 
 io.on('connection', (socket) => {
-  socket.join('test');
+  socket.join('all');
+  liveBoard.reset();
   socket.on('clientDrawing', (data) => {
-    console.log('got data from the client');
-    loadChange(data);
-    io.to('test').emit('renderme', serverData);
+    liveBoard.loadChange(data);
+    io.to('all').emit('renderme', liveBoard.board);
   });
 });
-
-
-
-module.exports = app;

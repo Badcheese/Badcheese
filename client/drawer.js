@@ -170,7 +170,7 @@ class Drawer {
       var center = shape.points[0];
       var distX = mousePoint.x - center.x;
       var distY = mousePoint.y - center.y;
-      shape.radius = distX > distY ? distX : distY;
+      shape.radius = Math.abs(distX > distY ? distX : distY);
     } else if (shape.type === ShapeTypes.line) {
       // lines have 2 points max
       if (shape.points.length > 1) {
