@@ -95,7 +95,7 @@
 	    key: 'updateCanvas',
 	    value: function updateCanvas() {
 	      var ctx = this.refs.canvas.getContext('2d');
-	      ctx.clearRect(0, 0, 500, 500);
+	      ctx.clearRect(0, 0, 750, 1000);
 	    }
 	  }, {
 	    key: 'render',
@@ -132,7 +132,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container-fluid', style: container },
-	          _react2.default.createElement('canvas', { style: canvas, ref: 'canvas', width: 500, height: 500 })
+	          _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
 	        )
 	      );
 	    }

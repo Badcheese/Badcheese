@@ -13,7 +13,7 @@ class App extends React.Component {
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    ctx.clearRect(0,0, 500, 500);
+    ctx.clearRect(0, 0, 750, 1000);
   }
   render() {
     const container = {
@@ -36,17 +36,17 @@ class App extends React.Component {
       color: 'red'
     };
 
-  return (
-    <div>
-      <div className="container-fluid" style={tools}>
-        <ToolBar />
+    return (
+      <div>
+        <div className="container-fluid" style={tools}>
+          <ToolBar />
+        </div>
+          <Nav style={nav}/>
+        <div className="container-fluid" style={container} >
+          <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
+        </div>
       </div>
-        <Nav style={nav}/>
-      <div className="container-fluid" style={container} >
-        <canvas style={canvas} ref="canvas" width={500} height={500} />
-      </div>
-    </div>
-    );
+      );
   }
 }
 
