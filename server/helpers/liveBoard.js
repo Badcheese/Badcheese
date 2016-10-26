@@ -20,6 +20,14 @@ module.exports = {
         this.board.next++;
       });
     }
+  },
+
+  reset: function reset() {
+    this.board = {
+      color: 'white',
+      shapes: {},
+      next: 0
+    };
   }
 };
 

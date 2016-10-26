@@ -43,6 +43,7 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
   socket.join('all');
+  liveBoard.reset();
   socket.on('clientDrawing', (data) => {
     liveBoard.loadChange(data);
     io.to('all').emit('renderme', liveBoard.board);

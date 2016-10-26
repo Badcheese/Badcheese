@@ -1,9 +1,9 @@
 var Render = function Render(canvasId) {
   const id = canvasId;
   const CIRCLE = 'circle';
-  const LINE = 'line';
-  const BOX = 'box';
-  const VECTOR = 'vector';
+  const LINE = 'path';
+  const BOX = 'rect';
+  const VECTOR = 'line';
   const c = document.getElementById(id).getContext('2d');
   const height = c.canvas.height;
   const width = c.canvas.width;
@@ -75,6 +75,7 @@ var Render = function Render(canvasId) {
 
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
+    c.stroke();
     c.closePath();
   };
 

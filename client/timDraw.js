@@ -1,4 +1,4 @@
-var shapes = [];
+window.shapes = [];
 var canvas = document.getElementById('draw-canvas');
 var ctx = canvas.getContext('2d');
 var drawer = new Drawer(canvas, shapes);
