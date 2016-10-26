@@ -1,6 +1,6 @@
 const socket = io();
 
-var render = Render('board123');
+window.render = Render('draw-canvas');
 
 
 // var adder = {
@@ -17,22 +17,41 @@ var render = Render('board123');
 //   ]
 // };
 
+var loadChange = function loadChange(serverData) {
+  if (serverData.color) {
+    window.data.color = serverData.color;
+  }
+  if (serverData.shapes) {
+    for (var key in serverData.shapes) {
+      data.shapes[key] = serverData.shapes[key];
+    }
+  }
+
+  if (serverData.currentShape) {
+    window.data.remoteShape = serverData.currentShape;
+  }
+};
+
 var tick = function tick() {
   var myDraw = {
     color: 'aliceBlue',
-    newShapes: shapes
+    newShapes: data.newShapes,
+    currentShape: data.currentShape
   };
+  if (data.newShapes.length > 0) {
+    data.newShapes = []; 
+  }
   socket.emit('clientDrawing', myDraw);
 };
 
 socket.on('renderme', (serverData) => {
-  render(serverData);
+  loadChange(serverData);
 });
-// socket.on('boardId', (data) => {
-//   console.log(data);
-// });
 
-setInterval(tick, 100);
+
+
+setInterval(tick, 250);
+window.requestAnimationFrame(render);
 
 // socket.on('boardId', function (data) {
 //   console.log(data);

@@ -7,8 +7,7 @@ var Render = function Render(canvasId) {
   const c = document.getElementById(id).getContext('2d');
   const height = c.canvas.height;
   const width = c.canvas.width;
-
-  let localData;
+  var localData;
 
   // {
   //   type: 'circle', //required STRING
@@ -66,6 +65,10 @@ var Render = function Render(canvasId) {
   //   lineWidth: 'width' //optional NUMBER, default is 1px
   // }
   var vector = function vector(shape) {
+    if (shape.points.length === 1) {
+      return;
+    }
+
     c.beginPath();
     addStyle(shape);
     var x1 = shape.points[0].x;
@@ -89,8 +92,13 @@ var Render = function Render(canvasId) {
   //   lineWidth: 'width' //optional NUMBER, default is 1px
   // }
   var box = function box(shape) {
+    if (shape.points.length === 1) {
+      return;
+    }
+    
     c.beginPath();
     addStyle(shape);
+
 
     var x0 = shape.points[0].x;
     var y0 = shape.points[0].y;
@@ -126,7 +134,8 @@ var Render = function Render(canvasId) {
   };
 
   var addBackground = function(data) {
-    box({points: [{x: 0, y: 0}, {x: width, y: height}], fillColor: (localData.color || 'white')});
+    c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+    // box({points: [{x: 0, y: 0}, {x: width, y: height}], fillColor: (localData.color || 'white')});
   };
 
   var addStyle = function addStyle(shape) {
@@ -161,9 +170,14 @@ var Render = function Render(canvasId) {
   // Data has a shapes property which is an array
   // of all the shapes that need to be drawn.
   // It can also have a color property to define background color.
-  return function render(change) {
+  return function render() {
 
-    localData = change;
+    localData = {
+      color: window.data.color,
+      shapes: window.data.shapes,
+      currShape: window.data.currentShape,
+      remoteShape: window.data.remoteShape
+    };
 
     addBackground(localData);
 
@@ -180,5 +194,35 @@ var Render = function Render(canvasId) {
         vector(shape);
       }
     }
+
+    var shape = localData.currShape;
+    if (shape) {
+      var type = shape.type;
+      if (type === CIRCLE) {
+        circle(shape);
+      } else if (type === LINE) {
+        line(shape);
+      } else if (type === BOX) {
+        box(shape);
+      } else if (type === VECTOR) {
+        vector(shape);
+      }
+    }
+
+    var shape = localData.remoteShape;
+    if (shape) {
+      var type = shape.type;
+      if (type === CIRCLE) {
+        circle(shape);
+      } else if (type === LINE) {
+        line(shape);
+      } else if (type === BOX) {
+        box(shape);
+      } else if (type === VECTOR) {
+        vector(shape);
+      }
+    }
+
+    window.requestAnimationFrame(render);
   };
 };
