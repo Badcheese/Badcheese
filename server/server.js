@@ -6,6 +6,7 @@ const handler = require('./helpers/request-handler.js');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+const port = 3000;
 // TODO: Will move routes to own module (routes.js)
 // const router = require('.helpers/routes.js');
 
@@ -25,14 +26,6 @@ app.use('/', express.static(path.join(__dirname, '..', 'client')));
 // app.param('boardId', handler.getBoard);
 // app.param('archiveId', handler.archiveBoard);
 
-// Routes
-// REVIEW: Serve index.html from project root?
-app.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, '..', 'index.html'));
-  res.sendFile(path.join(__dirname, 'index.html'));
-
-});
-
 // Create a new board
 // app.get('/board', handler.getNewBoard);
 //
@@ -43,11 +36,8 @@ app.get('/', (req, res) => {
 // app.post('board/:archiveId', handler.archiveBoard);
 
 // Server Port
-// app.listen(3000, () => {
-//   console.log('HTTP is up!');
-// });
-server.listen(3005, () => {
-  console.log('Socket is up!');
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
 let serverData = {
@@ -81,7 +71,3 @@ io.on('connection', (socket) => {
     io.to('test').emit('renderme', serverData);
   });
 });
-
-
-
-module.exports = app;
