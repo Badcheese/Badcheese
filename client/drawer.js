@@ -1,3 +1,10 @@
+window.data = {
+  color: 'aliceBlue',
+  shapes: {},
+  currentShape: null,
+  newShapes: []
+};
+
 var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
 var LineTypes = {round: 'round'};
 
@@ -202,3 +209,9 @@ window.Shape = Shape;
 window.Point = Point;
 window.ShapeTypes = ShapeTypes;
 window.LineTypes = LineTypes;
+
+var canvas = document.getElementById('draw-canvas');
+
+if (canvas && !window.drawer) {
+  window.drawer = new Drawer(canvas, window.data);
+}
