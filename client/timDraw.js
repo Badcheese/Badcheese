@@ -1,12 +1,18 @@
-window.shapes = [];
+window.data = {
+  color: 'aliceBlue',
+  shapes: {}
+};
+data.shapes = {};
+data.currentShape = null;
+data.newShapes = [];
 var canvas = document.getElementById('draw-canvas');
 var ctx = canvas.getContext('2d');
-var drawer = new Drawer(canvas, shapes);
+var drawer = new Drawer(canvas, window.data);
 var draw = function() {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  for (var i = 0; i < shapes.length; i++) {
-    var shape = shapes[i];
+  for (var key in data.shapes) {
+    var shape = data.shapes[key];
     ctx.lineWidth = shape.lineWidth;
     ctx.lineCap = shape.lineCap;
     ctx.lineJoin = shape.lineJoin;
@@ -48,4 +54,4 @@ var draw = function() {
 
   window.requestAnimationFrame(draw);
 };
-window.requestAnimationFrame(draw);
+// window.requestAnimationFrame(draw);

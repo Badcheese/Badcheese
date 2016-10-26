@@ -23,11 +23,12 @@ class Shape {
 
 class Drawer {
 
-  constructor(canvas, shapes) {
+  constructor(canvas, data) {
     this.canvas = canvas;
-    this.shapes = shapes;
+    // this.shapes = shapes;
+    this.data = data;
     this.isDrawing = false;
-    this.currentShape = null;
+    data.currentShape = null;
     this.currentShapeType = ShapeTypes.path;
     this.isSelecting = false;
 
@@ -53,57 +54,57 @@ class Drawer {
   }
 
   getSelectedShape(mousePoint) {
-    var selectedShape = null;
+    // var selectedShape = null;
 
-    for (var i = 0; i < this.shapes.length; i++) {
-      var shape = this.shapes[i];
-      var testX, testY = false;
+    // for (var i = 0; i < this.shapes.length; i++) {
+    //   var shape = this.shapes[i];
+    //   var testX, testY = false;
 
-      if (shape.type === ShapeTypes.rect) {
-        var p1 = shape.points[0];
-        var p2 = shape.points[1];
-        testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
-        testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
-      } else if (shape.type === ShapeTypes.circle) {
-        // pythagorean theorem
-        var center = shape.points[0];
-        var a = mousePoint.x - center.x;
-        var b = mousePoint.y - center.y;
-        var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-        testX = hyp < shape.radius;
-        testY = hyp < shape.radius;
-      }
+    //   if (shape.type === ShapeTypes.rect) {
+    //     var p1 = shape.points[0];
+    //     var p2 = shape.points[1];
+    //     testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
+    //     testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
+    //   } else if (shape.type === ShapeTypes.circle) {
+    //     // pythagorean theorem
+    //     var center = shape.points[0];
+    //     var a = mousePoint.x - center.x;
+    //     var b = mousePoint.y - center.y;
+    //     var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    //     testX = hyp < shape.radius;
+    //     testY = hyp < shape.radius;
+    //   }
 
-      if (testX && testY) {
-        console.log('GOT CIRCLE');
-        selectedShape = shape;
-        break;
-      }
-    }
+    //   if (testX && testY) {
+    //     console.log('GOT CIRCLE');
+    //     selectedShape = shape;
+    //     break;
+    //   }
+    // }
 
-    this.currentShape = selectedShape;
+    // this.currentShape = selectedShape;
   }
 
   moveSelectedShape(mousePoint) {
-    var shape = this.currentShape;
+    // var shape = this.currentShape;
 
-    if (!shape) {
-      return;
-    }
+    // if (!shape) {
+    //   return;
+    // }
 
-    if (shape.type === ShapeTypes.rect) {
-      var p1 = shape.points[0];
-      var p2 = shape.points[1];
-      var width = p2.x - p1.x;
-      var height = p2.y - p1.y;
+    // if (shape.type === ShapeTypes.rect) {
+    //   var p1 = shape.points[0];
+    //   var p2 = shape.points[1];
+    //   var width = p2.x - p1.x;
+    //   var height = p2.y - p1.y;
 
-      p1.x = mousePoint.x;
-      p1.y = mousePoint.y;
-      p2.x = mousePoint.x + width;
-      p2.y = mousePoint.y + height;
-    } else if (shape.type === ShapeTypes.circle) {
-      shape.points[0] = mousePoint;
-    }
+    //   p1.x = mousePoint.x;
+    //   p1.y = mousePoint.y;
+    //   p2.x = mousePoint.x + width;
+    //   p2.y = mousePoint.y + height;
+    // } else if (shape.type === ShapeTypes.circle) {
+    //   shape.points[0] = mousePoint;
+    // }
   }
 
   // mouse events & helpers ###########
@@ -118,7 +119,7 @@ class Drawer {
 
   handleMouseUp(e) {
     this.isDrawing = false;
-    var shape = this.currentShape;
+    var shape = this.data.currentShape;
 
     if (shape && (shape.mode === ShapeTypes.rect || shape.mode === ShapeTypes.line)) {
       if (shape.points.length > 1) {
@@ -127,6 +128,9 @@ class Drawer {
       var point = this.getMousePoint(e);
       shape.points.push(point);
     }
+
+    this.data.newShapes.push(shape);
+    this.data.currentShape = null;
   }
 
   handleMouseDown(e) {
@@ -140,15 +144,15 @@ class Drawer {
     }
 
     var points = [mousePoint];
-    this.currentShape = new Shape(this.currentShapeType, points);
-    this.shapes.push(this.currentShape);
+    this.data.currentShape = new Shape(this.currentShapeType, points);
+    // this.shapes.push(this.currentShape);
   }
 
   handleMouseMove(e) {
 
     if (!this.isDrawing) { return; }
     var mousePoint = this.getMousePoint(e);
-    var shape = this.currentShape;
+    var shape = this.data.currentShape;
 
     if (this.isSelecting) {
       this.moveSelectedShape(mousePoint);

@@ -45,7 +45,8 @@ io.on('connection', (socket) => {
   socket.join('all');
   liveBoard.reset();
   socket.on('clientDrawing', (data) => {
-    liveBoard.loadChange(data);
-    io.to('all').emit('renderme', liveBoard.board);
+    liveBoard.loadChange(data, function(changes) {
+      io.to('all').emit('renderme', changes);
+    });
   });
 });
