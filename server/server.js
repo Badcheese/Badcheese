@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve Static Files for React
 // app.use('/', express.static(path.join(__dirname, '..', 'src')));
-app.use('/', express.static(path.join(__dirname)));
+app.use('/', express.static(path.join(__dirname, '..', 'client')));
 
 
 // Params
