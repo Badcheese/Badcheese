@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const handler = require('./helpers/request-handler.js');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const liveBoard = require('./helpers/liveBoard.js');
 
 const port = 3000;
 // TODO: Will move routes to own module (routes.js)
@@ -40,34 +41,10 @@ server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-let serverData = {
-  color: 'white',
-  shapes: {},
-  next: 0,
-};
-
-const loadChange = (change) => {
-  if (change.color) {
-    serverData.color = change.color;
-  }
-  let clientShapes = change.shapes;
-  let serverShapes = serverData.shapes;
-  for (const shapeId in clientShapes) {
-    serverShapes[shapeId] = clientShapes[shapeId];
-  }
-  if (change.newShapes) {
-    change.newShapes.forEach((shape) => {
-      serverData.shapes[serverData.next] = shape;
-      serverData.next++;
-    });
-  }
-};
-
 io.on('connection', (socket) => {
-  socket.join('test');
+  socket.join('all');
   socket.on('clientDrawing', (data) => {
-    console.log('got data from the client');
-    loadChange(data);
-    io.to('test').emit('renderme', serverData);
+    liveBoard.loadChange(data);
+    io.to('all').emit('renderme', liveBoard.board);
   });
 });
