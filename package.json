@@ -28,8 +28,6 @@
     "enzyme": "^2.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "jsdom": "^8.1.0",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
     "mocha": "^3.0.2",
     "react-addons-test-utils": "^0.14.7",
     "sinon": "^1.17.3",
