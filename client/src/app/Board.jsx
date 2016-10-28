@@ -12,8 +12,9 @@ class Board extends React.Component {
 
   componentDidMount() {
     this.updateCanvas();
-
+    const currentRoom = window.location.hash.slice(1);
     const socket = io();
+    socket.emit('addMeToRoom', currentRoom);
 
     const drawer = initDrawer();
     this.drawer = drawer;

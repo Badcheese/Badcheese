@@ -6,16 +6,16 @@ const LiveBoard = require('./liveBoard');
 mongoose.Promise = Promise;
 
 // Board Related
-const boards = [];
+const boards = {};
 
 module.exports = {
 
   doGetNewBoard: (id) => {
     const board = LiveBoard();
-    boards.push({ id, board });
+    boards[id] = board;
   },
 
-  // doGetBoard: (id) => { TODO: gets an existing board },
+  doGetBoard: (id) => { return boards[id]; },
 
   // doArchiveBoard: () => { TODO: archives a finished board },
 
