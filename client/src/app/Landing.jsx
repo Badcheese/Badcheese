@@ -1,16 +1,20 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-const newBoard = () => {
-  console.log('button clicked');
-  const requestBoard = new XMLHttpRequest();
-  requestBoard.addEventListener('load', (data) => {
-    console.log(data);
-  });
-  requestBoard.open('GET', 'http://localhost:3000/board');
-  requestBoard.send();
-};
 
-const Landing = () => {
+const Landing = (props) => {
+  const App = props.App;
+  const newBoard = () => {
+    console.log('button clicked');
+    const requestBoard = new XMLHttpRequest();
+    requestBoard.addEventListener('load', (response) => {
+      const newBoardId = response.target.response;
+      window.location.hash = newBoardId;
+      ReactDOM.render(<App />, document.getElementById('root'));
+    });
+    requestBoard.open('GET', 'http://localhost:3000/board');
+    requestBoard.send();
+  };
   return (
     <center>
       <h1>Drawmie Landing Page</h1>

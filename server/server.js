@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const handler = require('./helpers/request-handler.js');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const liveBoard = require('./helpers/liveBoard.js');
+const LiveBoard = require('./helpers/liveBoard.js');
+const util = require('./helpers/utils');
 
 const port = 3000;
 // TODO: Will move routes to own module (routes.js)
@@ -43,11 +44,16 @@ server.listen(port, () => {
 });
 
 io.on('connection', (socket) => {
-  socket.join('all');
-  liveBoard.reset();
-  socket.on('clientDrawing', (data) => {
-    liveBoard.loadChange(data, function(changes) {
-      io.to('all').emit('renderme', changes);
-    });
+  socket.on('addMeToRoom', (id) => {
+    const liveBoard = util.doGetBoard(id);
+    if (liveBoard) {  
+      socket.join(id);
+      io.to(id).emit('renderme', liveBoard.board);
+      socket.on('clientDrawing', (data) => {
+        liveBoard.loadChange(data, function(changes) {
+          io.to(id).emit('renderme', changes);
+        });
+      });
+    }
   });
 });
