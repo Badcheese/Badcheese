@@ -1,41 +1,45 @@
-module.exports = {
-  board: {
-    color: 'white',
-    shapes: {},
-    next: 0
-  },
-  
-  loadChange: function loadChange(change, emit) {
-    var emitChange = {
-      shapes: {}
-    };
-    if (change.color) {
-      this.board.color = change.color;
-      emitChange.color = change.color;
-    }
-    if (change.newShapes) {
-      change.newShapes.forEach(function(shape) {
-        this.board.shapes[this.board.next] = shape;
-        emitChange.shapes[this.board.next] = shape;
-        this.board.next++;
-      }.bind(this));
-    }
-
-    if (change.currentShape) {
-      emitChange.currentShape = change.currentShape;
-    }
-
-    emit(emitChange);
-  },
-
-  reset: function reset() {
-    this.board = {
+const LiveBoard = () => {
+  return {
+    board: {
       color: 'white',
       shapes: {},
       next: 0
-    };
-  }
+    },
+
+    loadChange: function loadChange(change, emit) {
+      var emitChange = {
+        shapes: {}
+      };
+      if (change.color) {
+        this.board.color = change.color;
+        emitChange.color = change.color;
+      }
+      if (change.newShapes) {
+        change.newShapes.forEach(function(shape) {
+          this.board.shapes[this.board.next] = shape;
+          emitChange.shapes[this.board.next] = shape;
+          this.board.next++;
+        }.bind(this));
+      }
+
+      if (change.currentShape) {
+        emitChange.currentShape = change.currentShape;
+      }
+
+      emit(emitChange);
+    },
+
+    reset: function reset() {
+      this.board = {
+        color: 'white',
+        shapes: {},
+        next: 0
+      };
+    }
+  };
 };
+
+module.exports = LiveBoard;
 
 /* EXAMPLE CHANGE
 var Examplechange = {

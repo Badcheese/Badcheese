@@ -8,8 +8,9 @@ module.exports = {
   },
 
   getNewBoard: (req, res, next) => {
-    
-    res.send('Got your request');
+    const newId = util.doGenerateNewId();
+    util.doGetNewBoard(newId);
+    res.json(newId);
   },
 
   // getBoard: (req, res, next, boardId) => { TODO: call doGetBoard util },

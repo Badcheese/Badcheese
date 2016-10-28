@@ -11,7 +11,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Board />
+        {function() {
+          if (window.location.hash === '') {
+            return (<Landing App={App}/>);
+          } else {
+            return (<Board/>);
+          }
+        }()}
       </div>
     );
   }
@@ -19,4 +25,4 @@ class App extends React.Component {
 
 export default App;
 
-ReactDOM.render(<App cool={'really boring text'}/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
