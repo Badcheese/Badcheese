@@ -3,11 +3,15 @@ const socket = io();
 window.render = Render('draw-canvas');
 
 var loadChange = function loadChange(serverData) {
+  console.log('loadChange');
+
   if (serverData.color) {
     window.data.color = serverData.color;
   }
+
   if (serverData.shapes) {
     for (var key in serverData.shapes) {
+      console.log('LOADING: ', serverData.shapes[key].id);
       data.shapes[key] = serverData.shapes[key];
     }
   }
@@ -18,14 +22,17 @@ var loadChange = function loadChange(serverData) {
 };
 
 var tick = function tick() {
+
   var myDraw = {
     color: 'aliceBlue',
     newShapes: data.newShapes,
     currentShape: data.currentShape
   };
+
   if (data.newShapes.length > 0) {
     data.newShapes = [];
   }
+
   socket.emit('clientDrawing', myDraw);
 };
 

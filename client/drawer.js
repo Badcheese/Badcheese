@@ -3,7 +3,8 @@ var initDrawer = function initDrawer() {
     color: 'aliceBlue',
     shapes: {},
     currentShape: null,
-    newShapes: []
+    newShapes: [],
+    modifiedShapes: []
   };
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
@@ -41,6 +42,7 @@ var initDrawer = function initDrawer() {
       this.isSelecting = false;
       this.ShapeTypes = ShapeTypes;
       this.LineTypes = LineTypes;
+      this.selectedShape = null;
       // keep this last so state is setup to hanlde drawing
       this.addListeners();
     }
@@ -90,11 +92,11 @@ var initDrawer = function initDrawer() {
         }
       }
 
-      this.data.currentShape = selectedShape;
+      this.selectedShape = selectedShape;
     }
 
     moveSelectedShape(mousePoint) {
-      var shape = this.data.currentShape;
+      var shape = this.selectedShape;
 
       if (!shape) {
         return;
@@ -115,7 +117,6 @@ var initDrawer = function initDrawer() {
       }
     }
 
-
     // mouse events & helpers ###########
 
     getMousePoint(e) {
@@ -128,7 +129,17 @@ var initDrawer = function initDrawer() {
 
     handleMouseUp(e) {
       this.isDrawing = false;
+
+      if (this.isSelecting) {
+        this.data.modifiedShapes.push(this.selectedShape);
+        return;
+      }
+
       var shape = this.data.currentShape;
+
+      if (!shape) {
+        return;
+      }
 
       if (shape && (shape.mode === ShapeTypes.rect || shape.mode === ShapeTypes.line)) {
         if (shape.points.length > 1) {
@@ -140,6 +151,8 @@ var initDrawer = function initDrawer() {
 
       this.data.newShapes.push(shape);
       this.data.currentShape = null;
+
+      console.log('SHAPE COUNT: ', this.data.newShapes.length);
     }
 
     handleMouseDown(e) {

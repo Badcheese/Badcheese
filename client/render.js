@@ -182,6 +182,11 @@ var Render = function Render(canvasId, drawer) {
 
     for (var shapeKey in localData.shapes) {
       var shape = localData.shapes[shapeKey];
+
+      if (!shape) {
+        continue;
+      }
+
       var type = shape.type;
       if (type === CIRCLE) {
         circle(shape);
@@ -194,31 +199,29 @@ var Render = function Render(canvasId, drawer) {
       }
     }
 
-    var shape = localData.currShape;
-    if (shape) {
-      var type = shape.type;
-      if (type === CIRCLE) {
-        circle(shape);
-      } else if (type === LINE) {
-        line(shape);
-      } else if (type === BOX) {
-        box(shape);
-      } else if (type === VECTOR) {
-        vector(shape);
+    var currShape = localData.currShape;
+    if (currShape) {
+      if (currShape.type === CIRCLE) {
+        circle(currShape);
+      } else if (currShape.type === LINE) {
+        line(currShape);
+      } else if (currShape.type === BOX) {
+        box(currShape);
+      } else if (currShape.type === VECTOR) {
+        vector(currShape);
       }
     }
 
-    var shape = localData.remoteShape;
-    if (shape) {
-      var type = shape.type;
-      if (type === CIRCLE) {
-        circle(shape);
-      } else if (type === LINE) {
-        line(shape);
-      } else if (type === BOX) {
-        box(shape);
-      } else if (type === VECTOR) {
-        vector(shape);
+    var remoteShape = localData.remoteShape;
+    if (remoteShape && (!currShape || remoteShape.guid !== currShape.guid)) {
+      if (remoteShape.type === CIRCLE) {
+        circle(remoteShape);
+      } else if (remoteShape.type === LINE) {
+        line(remoteShape);
+      } else if (remoteShape.type === BOX) {
+        box(remoteShape);
+      } else if (remoteShape.type === VECTOR) {
+        vector(remoteShape);
       }
     }
 

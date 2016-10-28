@@ -23,8 +23,11 @@ class Board extends React.Component {
       if (serverData.color) {
         drawer.data.color = serverData.color;
       }
+
       if (serverData.shapes) {
         for (var key in serverData.shapes) {
+          var serverShape = serverData.shapes[key];
+          console.log("server shape: ", serverShape.guid);
           drawer.data.shapes[key] = serverData.shapes[key];
         }
       }
@@ -35,14 +38,18 @@ class Board extends React.Component {
     };
 
     var tick = function tick() {
+
       var myDraw = {
         color: 'aliceBlue',
         newShapes: drawer.data.newShapes,
-        currentShape: drawer.data.currentShape
+        currentShape: drawer.data.currentShape,
+        shapes: drawer.data.modifiedShapes
       };
+
       if (drawer.data.newShapes.length > 0) {
         drawer.data.newShapes = [];
       }
+
       socket.emit('clientDrawing', myDraw);
     };
 
