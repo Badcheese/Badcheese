@@ -16,6 +16,7 @@ const LiveBoard = () => {
       }
       if (change.newShapes) {
         change.newShapes.forEach(function(shape) {
+          shape.id = this.board.next;
           this.board.shapes[this.board.next] = shape;
           emitChange.shapes[this.board.next] = shape;
           this.board.next++;

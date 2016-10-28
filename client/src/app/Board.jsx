@@ -42,12 +42,17 @@ class Board extends React.Component {
     };
 
     var tick = function tick() {
+      var shapes = {};
+
+      if (drawer.data.modifiedShape) {
+        shapes[drawer.data.modifiedShape.id] = drawer.data.modifiedShape;
+      }
 
       var myDraw = {
         color: 'aliceBlue',
         newShapes: drawer.data.newShapes,
         currentShape: drawer.data.currentShape,
-        shapes: drawer.data.modifiedShapes
+        shapes: shapes
       };
 
       if (drawer.data.newShapes.length > 0) {

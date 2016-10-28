@@ -4,7 +4,7 @@ var initDrawer = function initDrawer() {
     shapes: {},
     currentShape: null,
     newShapes: [],
-    modifiedShapes: []
+    modifiedShape: null
   };
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
@@ -42,7 +42,6 @@ var initDrawer = function initDrawer() {
       this.isSelecting = false;
       this.ShapeTypes = ShapeTypes;
       this.LineTypes = LineTypes;
-      this.selectedShape = null;
       // keep this last so state is setup to hanlde drawing
       this.addListeners();
     }
@@ -92,11 +91,11 @@ var initDrawer = function initDrawer() {
         }
       }
 
-      this.selectedShape = selectedShape;
+      this.data.modifiedShape = selectedShape;
     }
 
     moveSelectedShape(mousePoint) {
-      var shape = this.selectedShape;
+      var shape = this.data.modifiedShape;
 
       if (!shape) {
         return;
@@ -131,7 +130,6 @@ var initDrawer = function initDrawer() {
       this.isDrawing = false;
 
       if (this.isSelecting) {
-        this.data.modifiedShapes.push(this.selectedShape);
         return;
       }
 
