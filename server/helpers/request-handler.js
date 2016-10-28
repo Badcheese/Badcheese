@@ -2,7 +2,15 @@ const util = require('./utils.js');
 
 module.exports = {
 
-  // getNewBoard: (req, res, next) => { TODO: call doGetNewBoard util },
+  logger: (req, res, next) => {
+    console.log(`Serving ${req.method} request @ ${req.path}`);
+    next();
+  },
+
+  getNewBoard: (req, res, next) => {
+    
+    res.send('Got your request');
+  },
 
   // getBoard: (req, res, next, boardId) => { TODO: call doGetBoard util },
 

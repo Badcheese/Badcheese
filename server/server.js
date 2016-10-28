@@ -17,6 +17,7 @@ const port = 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(handler.logger);
 
 // Serve Static Files for React
 // app.use('/', express.static(path.join(__dirname, '..', 'src')));
@@ -28,7 +29,7 @@ app.use('/', express.static(path.join(__dirname, '..', 'client')));
 // app.param('archiveId', handler.archiveBoard);
 
 // Create a new board
-// app.get('/board', handler.getNewBoard);
+app.get('/board', handler.getNewBoard);
 //
 // // Get a board by id
 // app.get('/board/:boardId', handler.getBoard);

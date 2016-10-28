@@ -4,7 +4,7 @@ module.exports = {
     shapes: {},
     next: 0
   },
-
+  
   loadChange: function loadChange(change, emit) {
     var emitChange = {
       shapes: {}
@@ -20,7 +20,7 @@ module.exports = {
         this.board.next++;
       }.bind(this));
     }
-    
+
     if (change.currentShape) {
       emitChange.currentShape = change.currentShape;
     }
@@ -39,9 +39,9 @@ module.exports = {
 
 /* EXAMPLE CHANGE
 var Examplechange = {
-  
-  color: cssColor, //this is optional, if included it will change the background of the board to the provided color. Otherwhise the background will stay the same as it is.  
-  
+
+  color: cssColor, //this is optional, if included it will change the background of the board to the provided color. Otherwhise the background will stay the same as it is.
+
   shapes: { //this is optional, changes to existing shapes go here
     0: {
       type: 'circle', //required STRING
@@ -66,7 +66,7 @@ var Examplechange = {
       type: 'box', //required STRING
       points: [{x, y}, {x, y}], //required 2-x-tuple array, values should be integers, each object should have 'x' and 'y' property
       strokeColor: 'cssColor', //optional, default is black any valid css Color is ok
-      fillColor: 'cssColor', //optional, if included box will be filled      
+      fillColor: 'cssColor', //optional, if included box will be filled
       lineJoin: 'type', //optional STRING, default is 'round'
       lineCap: 'type', //optional STRING, default is 'round'
       lineWidth: 'width' //optional NUMBER, default is 1px

@@ -60,11 +60,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Landing = __webpack_require__(161);
+	var _Landing = __webpack_require__(159);
 
 	var _Landing2 = _interopRequireDefault(_Landing);
 
-	var _Board = __webpack_require__(162);
+	var _Board = __webpack_require__(214);
 
 	var _Board2 = _interopRequireDefault(_Board);
 
@@ -92,7 +92,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Landing2.default, null)
+	        _react2.default.createElement(_Board2.default, null)
 	      );
 	    }
 	  }]);
@@ -19803,103 +19803,6 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Nav = function Nav(props) {
-	  return _react2.default.createElement(
-	    "nav",
-	    { className: "navbar" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "col-md-6 col-md-offset-3" },
-	      _react2.default.createElement(
-	        "h1",
-	        null,
-	        "Drawmie (From Nav)"
-	      )
-	    )
-	  );
-	};
-
-	exports.default = Nav;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ToolBar = function ToolBar(props) {
-	  return _react2.default.createElement(
-	    "nav",
-	    { className: "toolbar" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "container" },
-	      _react2.default.createElement(
-	        "ul",
-	        { className: "toolList" },
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        ),
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        ),
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        ),
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        ),
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        ),
-	        _react2.default.createElement(
-	          "li",
-	          { className: "tools" },
-	          "Tools"
-	        )
-	      )
-	    )
-	  );
-	};
-
-	exports.default = ToolBar;
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var _react = __webpack_require__(1);
@@ -19907,6 +19810,16 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var newBoard = function newBoard() {
+	  console.log('button clicked');
+	  var requestBoard = new XMLHttpRequest();
+	  requestBoard.addEventListener('load', function (data) {
+	    console.log(data);
+	  });
+	  requestBoard.open('GET', 'http://localhost:3000/board');
+	  requestBoard.send();
+	};
 
 	var Landing = function Landing() {
 	  return _react2.default.createElement(
@@ -19919,7 +19832,7 @@
 	    ),
 	    _react2.default.createElement(
 	      'button',
-	      null,
+	      { onClick: newBoard },
 	      'New Drawmie'
 	    )
 	  );
@@ -19928,7 +19841,61 @@
 	module.exports = Landing;
 
 /***/ },
-/* 162 */
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19943,11 +19910,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ToolBar = __webpack_require__(160);
+	var _ToolBar = __webpack_require__(215);
 
 	var _ToolBar2 = _interopRequireDefault(_ToolBar);
 
-	var _Nav = __webpack_require__(159);
+	var _Nav = __webpack_require__(216);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -19972,6 +19939,51 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.updateCanvas();
+
+	      var socket = io();
+
+	      window.render = Render('draw-canvas');
+
+	      var loadChange = function loadChange(serverData) {
+	        if (serverData.color) {
+	          window.data.color = serverData.color;
+	        }
+	        if (serverData.shapes) {
+	          for (var key in serverData.shapes) {
+	            data.shapes[key] = serverData.shapes[key];
+	          }
+	        }
+
+	        if (serverData.currentShape) {
+	          window.data.remoteShape = serverData.currentShape;
+	        }
+	      };
+
+	      var tick = function tick() {
+	        var myDraw = {
+	          color: 'aliceBlue',
+	          newShapes: data.newShapes,
+	          currentShape: data.currentShape
+	        };
+	        if (data.newShapes.length > 0) {
+	          data.newShapes = [];
+	        }
+	        socket.emit('clientDrawing', myDraw);
+	      };
+
+	      socket.on('renderme', function (serverData) {
+	        loadChange(serverData);
+	      });
+
+	      setInterval(tick, 250);
+	      window.requestAnimationFrame(render);
+
+	      socket.on('boardId', function (data) {
+	        console.log(data);
+	        socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
+	      });
+
+	      initDrawer();
 	    }
 	  }, {
 	    key: 'updateCanvas',
@@ -20063,6 +20075,103 @@
 	}(_react2.default.Component);
 
 	exports.default = Board;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ToolBar = function ToolBar(props) {
+	  return _react2.default.createElement(
+	    "nav",
+	    { className: "toolbar" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "container" },
+	      _react2.default.createElement(
+	        "ul",
+	        { className: "toolList" },
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        ),
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        ),
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        ),
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        ),
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        ),
+	        _react2.default.createElement(
+	          "li",
+	          { className: "tools" },
+	          "Tools"
+	        )
+	      )
+	    )
+	  );
+	};
+
+	exports.default = ToolBar;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Nav = function Nav(props) {
+	  return _react2.default.createElement(
+	    "nav",
+	    { className: "navbar" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "col-md-6 col-md-offset-3" },
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        "Drawmie (From Nav)"
+	      )
+	    )
+	  );
+	};
+
+	exports.default = Nav;
 
 /***/ }
 /******/ ]);
