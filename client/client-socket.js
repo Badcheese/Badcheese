@@ -1,6 +1,6 @@
 const socket = io();
 
-window.render = Render('draw-canvas');
+// window.render = Render('draw-canvas');
 
 
 // var adder = {
@@ -39,7 +39,7 @@ var tick = function tick() {
     currentShape: data.currentShape
   };
   if (data.newShapes.length > 0) {
-    data.newShapes = []; 
+    data.newShapes = [];
   }
   socket.emit('clientDrawing', myDraw);
 };
@@ -50,8 +50,8 @@ socket.on('renderme', (serverData) => {
 
 
 
-setInterval(tick, 250);
-window.requestAnimationFrame(render);
+// setInterval(tick, 250);
+// window.requestAnimationFrame(render);
 
 // socket.on('boardId', function (data) {
 //   console.log(data);

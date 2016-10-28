@@ -85,48 +85,6 @@
 	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	    // This line is important!
 	  }
-	  // componentDidMount() {
-	  //   this.updateCanvas();
-	  // }
-	  // updateCanvas() {
-	  //   const ctx = this.refs.canvas.getContext('2d');
-	  //   ctx.clearRect(0, 0, 750, 1000);
-	  // }
-	  // render() {
-	  //   const container = {
-	  //     marginLeft: '30%',
-	  //     paddingLeft: 30,
-	  //
-	  //     position: 'fixed'
-	  //   };
-	  //   const canvas = {
-	  //     border: '15px solid gray',
-	  //     borderRadius: '5px',
-	  //   };
-	  //   const tools = {
-	  //     listStyleType: 'none',
-	  //     marginTop: '85px',
-	  //     position: 'fixed'
-	  //   };
-	  //   const nav = {
-	  //     marginLeft: '-25px',
-	  //     color: 'red'
-	  //   };
-
-	  // return (
-	  //   <div>
-	  //     <div className="container-fluid" style={tools}>
-	  //       <ToolBar />
-	  //     </div>
-	  //       <Nav style={nav}/>
-	  //     <div className="container-fluid" style={container} >
-	  //       <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
-	  //     </div>
-	  //   </div>
-	  //   );
-	  // }
-	  //
-
 
 	  _createClass(App, [{
 	    key: 'render',
@@ -134,7 +92,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Board2.default, null)
+	        _react2.default.createElement(_Landing2.default, null)
 	      );
 	    }
 	  }]);
@@ -19867,7 +19825,7 @@
 	      _react2.default.createElement(
 	        "h1",
 	        null,
-	        "Drawmie"
+	        "Drawmie (From Nav)"
 	      )
 	    )
 	  );
@@ -19940,26 +19898,34 @@
 
 /***/ },
 /* 161 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Landing = function Landing() {
-	  return React.createElement(
-	    "center",
+	  return _react2.default.createElement(
+	    'center',
 	    null,
-	    React.createElement(
-	      "h1",
+	    _react2.default.createElement(
+	      'h1',
 	      null,
-	      "Drawmie Fam"
+	      'Drawmie Landing Page'
 	    ),
-	    React.createElement(
-	      "button",
+	    _react2.default.createElement(
+	      'button',
 	      null,
-	      "Click Me Fam"
+	      'New Drawmie'
 	    )
 	  );
 	};
+
+	module.exports = Landing;
 
 /***/ },
 /* 162 */
@@ -20040,15 +20006,54 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid', style: tools },
-	          _react2.default.createElement(_ToolBar2.default, null)
+	          'h1',
+	          null,
+	          'Drawmie'
 	        ),
-	        _react2.default.createElement(_Nav2.default, { style: nav }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'container-fluid', style: container },
-	          _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid', style: tools },
+	            _react2.default.createElement(_ToolBar2.default, null)
+	          ),
+	          _react2.default.createElement(_Nav2.default, { style: nav }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid', style: container },
+	            _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'tools' },
+	          'Tools:',
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.toggleIsSelecting()', href: '#' },
+	            'Select Tool'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.line)', href: '#' },
+	            'Line'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.path)', href: '#' },
+	            'Path'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.rect)', href: '#' },
+	            'Rect'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.circle)', href: '#' },
+	            'Circle'
+	          )
 	        )
 	      );
 	    }

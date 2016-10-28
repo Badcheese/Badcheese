@@ -38,12 +38,24 @@ class Board extends React.Component {
 
     return (
       <div>
-        <div className="container-fluid" style={tools}>
-          <ToolBar />
+        <h1>Drawmie</h1>
+        <div>
+          <div className="container-fluid" style={tools}>
+            <ToolBar />
+          </div>
+            <Nav style={nav}/>
+          <div className="container-fluid" style={container} >
+            <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
+          </div>
         </div>
-          <Nav style={nav}/>
-        <div className="container-fluid" style={container} >
-          <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
+
+        <div id='tools'>
+          Tools:
+          <a onclick="drawer.toggleIsSelecting()" href='#'>Select Tool</a>
+          <a onclick="drawer.changeShapeType(ShapeTypes.line)" href='#'>Line</a>
+          <a onclick="drawer.changeShapeType(ShapeTypes.path)" href='#'>Path</a>
+          <a onclick="drawer.changeShapeType(ShapeTypes.rect)" href='#'>Rect</a>
+          <a onclick="drawer.changeShapeType(ShapeTypes.circle)" href='#'>Circle</a>
         </div>
       </div>
     );
