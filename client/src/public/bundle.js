@@ -60,13 +60,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Nav = __webpack_require__(159);
+	var _Landing = __webpack_require__(159);
 
-	var _Nav2 = _interopRequireDefault(_Nav);
+	var _Landing2 = _interopRequireDefault(_Landing);
 
-	var _ToolBar = __webpack_require__(160);
+	var _Board = __webpack_require__(160);
 
-	var _ToolBar2 = _interopRequireDefault(_ToolBar);
+	var _Board2 = _interopRequireDefault(_Board);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -87,53 +87,12 @@
 	  }
 
 	  _createClass(App, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.updateCanvas();
-	    }
-	  }, {
-	    key: 'updateCanvas',
-	    value: function updateCanvas() {
-	      var ctx = this.refs.canvas.getContext('2d');
-	      ctx.clearRect(0, 0, 750, 1000);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var container = {
-	        marginLeft: '30%',
-	        paddingLeft: 30,
-
-	        position: 'fixed'
-	      };
-	      var canvas = {
-	        border: '15px solid gray',
-	        borderRadius: '5px'
-	      };
-	      var tools = {
-	        listStyleType: 'none',
-	        marginTop: '85px',
-	        position: 'fixed'
-	      };
-	      var nav = {
-	        marginLeft: '-25px',
-	        color: 'red'
-	      };
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid', style: tools },
-	          _react2.default.createElement(_ToolBar2.default, null)
-	        ),
-	        _react2.default.createElement(_Nav2.default, { style: nav }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid', style: container },
-	          _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
-	        )
+	        _react2.default.createElement(_Board2.default, null)
 	      );
 	    }
 	  }]);
@@ -144,7 +103,7 @@
 	exports.default = App;
 
 
-	_reactDom2.default.render(_react2.default.createElement(App, { cool: "really boring text" }), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement(App, { cool: 'really boring text' }), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -19844,11 +19803,7 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	'use strict';
 
 	var _react = __webpack_require__(1);
 
@@ -19856,26 +19811,226 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Nav = function Nav(props) {
+	var newBoard = function newBoard() {
+	  console.log('button clicked');
+	  var requestBoard = new XMLHttpRequest();
+	  requestBoard.addEventListener('load', function (data) {
+	    console.log(data);
+	  });
+	  requestBoard.open('GET', 'http://localhost:3000/board');
+	  requestBoard.send();
+	};
+
+	var Landing = function Landing() {
 	  return _react2.default.createElement(
-	    "nav",
-	    { className: "navbar" },
+	    'center',
+	    null,
 	    _react2.default.createElement(
-	      "div",
-	      { className: "col-md-6 col-md-offset-3" },
-	      _react2.default.createElement(
-	        "h1",
-	        null,
-	        "Drawmie"
-	      )
+	      'h1',
+	      null,
+	      'Drawmie Landing Page'
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: newBoard },
+	      'New Drawmie'
 	    )
 	  );
 	};
 
-	exports.default = Nav;
+	module.exports = Landing;
 
 /***/ },
 /* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ToolBar = __webpack_require__(161);
+
+	var _ToolBar2 = _interopRequireDefault(_ToolBar);
+
+	var _Nav = __webpack_require__(162);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _render = __webpack_require__(163);
+
+	var _render2 = _interopRequireDefault(_render);
+
+	var _drawer = __webpack_require__(164);
+
+	var _drawer2 = _interopRequireDefault(_drawer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Board = function (_React$Component) {
+	  _inherits(Board, _React$Component);
+
+	  function Board(props) {
+	    _classCallCheck(this, Board);
+
+	    return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+	  }
+
+	  _createClass(Board, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.updateCanvas();
+
+	      var socket = io();
+
+	      var drawer = (0, _drawer2.default)();
+	      var render = (0, _render2.default)('draw-canvas', drawer);
+
+	      var loadChange = function loadChange(serverData) {
+	        if (serverData.color) {
+	          drawer.data.color = serverData.color;
+	        }
+	        if (serverData.shapes) {
+	          for (var key in serverData.shapes) {
+	            drawer.data.shapes[key] = serverData.shapes[key];
+	          }
+	        }
+
+	        if (serverData.currentShape) {
+	          drawer.data.remoteShape = serverData.currentShape;
+	        }
+	      };
+
+	      var tick = function tick() {
+	        var myDraw = {
+	          color: 'aliceBlue',
+	          newShapes: drawer.data.newShapes,
+	          currentShape: drawer.data.currentShape
+	        };
+	        if (drawer.data.newShapes.length > 0) {
+	          drawer.data.newShapes = [];
+	        }
+	        socket.emit('clientDrawing', myDraw);
+	      };
+
+	      socket.on('renderme', function (serverData) {
+	        loadChange(serverData);
+	      });
+
+	      setInterval(tick, 250);
+	      window.requestAnimationFrame(render);
+
+	      // socket.on('boardId', function (data) {
+	      //   console.log(data);
+	      //   socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
+	      // });
+	    }
+	  }, {
+	    key: 'updateCanvas',
+	    value: function updateCanvas() {
+	      var ctx = this.refs.canvas.getContext('2d');
+	      ctx.clearRect(0, 0, 750, 1000);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var container = {
+	        marginLeft: '30%',
+	        paddingLeft: 30,
+
+	        position: 'fixed'
+	      };
+	      var canvas = {
+	        border: '15px solid gray',
+	        borderRadius: '5px'
+	      };
+	      var tools = {
+	        listStyleType: 'none',
+	        marginTop: '85px',
+	        position: 'fixed'
+	      };
+	      var nav = {
+	        marginLeft: '-25px',
+	        color: 'red'
+	      };
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Drawmie'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid', style: tools },
+	            _react2.default.createElement(_ToolBar2.default, null)
+	          ),
+	          _react2.default.createElement(_Nav2.default, { style: nav }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid', style: container },
+	            _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'tools' },
+	          'Tools:',
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.toggleIsSelecting()', href: '#' },
+	            'Select Tool'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.line)', href: '#' },
+	            'Line'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.path)', href: '#' },
+	            'Path'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.rect)', href: '#' },
+	            'Rect'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { onclick: 'drawer.changeShapeType(ShapeTypes.circle)', href: '#' },
+	            'Circle'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Board;
+	}(_react2.default.Component);
+
+	exports.default = Board;
+
+/***/ },
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19936,6 +20091,521 @@
 	};
 
 	exports.default = ToolBar;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Nav = function Nav(props) {
+	  return _react2.default.createElement(
+	    "nav",
+	    { className: "navbar" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "col-md-6 col-md-offset-3" },
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        "Drawmie (From Nav)"
+	      )
+	    )
+	  );
+	};
+
+	exports.default = Nav;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var Render = function Render(canvasId, drawer) {
+	  var id = canvasId;
+	  var CIRCLE = 'circle';
+	  var LINE = 'path';
+	  var BOX = 'rect';
+	  var VECTOR = 'line';
+	  var c = document.getElementById(id).getContext('2d');
+	  var height = c.canvas.height;
+	  var width = c.canvas.width;
+
+	  // {
+	  //   type: 'circle', //required STRING
+	  //   points: [{x, y}], //required NUMBERS
+	  //   radius: 'radius', //required NUMBER
+	  //   strokeColor: 'cssColor', //optional, default is black any valid css Color is ok
+	  //   fillColor: 'cssColor', //optional, if included circle will be filled
+	  //   lineWidth: 'width' //optional NUMBER, default is 1px
+	  // }
+	  var circle = function circle(shape) {
+	    c.beginPath();
+	    addStyle(shape);
+	    var x = shape.points[0].x;
+	    var y = shape.points[0].y;
+	    var r = shape.radius;
+
+	    c.arc(x, y, r, 0, 2 * Math.PI);
+	    shape.fillColor ? c.fill() : c.stroke();
+	    c.closePath();
+	  };
+
+	  // {
+	  //   type: 'line', //required STRING
+	  //   points: [{x, y}, {x, y}, {x, y}], //required n-x-tuple array, values should be integers, each object should have 'x' and 'y' property
+	  //   strokeColor: 'cssColor', //optional, default is black any valid css Color is ok
+	  //   lineJoin: 'type', //optional STRING, default is 'round'
+	  //   lineCap: 'type', //optional STRING, default is 'round'
+	  //   lineWidth: 'width' //optional NUMBER, default is 1px
+	  // }
+	  var line = function line(shape) {
+
+	    c.beginPath();
+	    addStyle(shape);
+
+	    if (shape.points.length > 0) {
+	      var x = shape.points[0].x;
+	      var y = shape.points[0].y;
+	      c.moveTo(x, y);
+	    }
+	    shape.points.forEach(function (point) {
+	      x = point.x;
+	      y = point.y;
+	      c.lineTo(x, y);
+	    });
+	    c.stroke();
+	    c.closePath();
+	  };
+
+	  // { //vector type might be unnecessary, as it is just a 2 point line
+	  //   type: 'vector', //required STRING
+	  //   points: [{x, y}, {x, y}], //required 2-x-tuple array, values should be integers, each object should have 'x' and 'y' property
+	  //   strokeColor: 'cssColor', //optional, default is black any valid css Color is ok
+	  //   lineJoin: 'type', //optional STRING, default is 'round'
+	  //   lineCap: 'type', //optional STRING, default is 'round'
+	  //   lineWidth: 'width' //optional NUMBER, default is 1px
+	  // }
+	  var vector = function vector(shape) {
+	    if (shape.points.length === 1) {
+	      return;
+	    }
+
+	    c.beginPath();
+	    addStyle(shape);
+	    var x1 = shape.points[0].x;
+	    var y1 = shape.points[0].y;
+	    var x2 = shape.points[1].x;
+	    var y2 = shape.points[1].y;
+
+	    c.moveTo(x1, y1);
+	    c.lineTo(x2, y2);
+	    c.stroke();
+	    c.closePath();
+	  };
+
+	  // {
+	  //   type: 'box', //required STRING
+	  //   points: [{x, y}, {x, y}], //required 2-x-tuple array, values should be integers, each object should have 'x' and 'y' property
+	  //   strokeColor: 'cssColor', //optional, default is black any valid css Color is ok
+	  //   fillColor: 'cssColor', //optional, if included box will be filled
+	  //   lineJoin: 'type', //optional STRING, default is 'round'
+	  //   lineCap: 'type', //optional STRING, default is 'round'
+	  //   lineWidth: 'width' //optional NUMBER, default is 1px
+	  // }
+	  var box = function box(shape) {
+	    if (shape.points.length === 1) {
+	      return;
+	    }
+
+	    c.beginPath();
+	    addStyle(shape);
+
+	    var x0 = shape.points[0].x;
+	    var y0 = shape.points[0].y;
+	    var x2 = shape.points[1].x;
+	    var y2 = shape.points[1].y;
+	    var x1, y1, x3, y3;
+
+	    shape.alpha ? 0 : shape.alpha = 0;
+
+	    // var a = x2 - x0;
+	    // var b = y2 - y0;
+	    // var theta = Math.atan(b / a) + shape.alpha;
+	    // var rad = Math.sqrt(Math.pow(x2 - x0, 2) + Math.pow(y2 - y0, 2));
+	    // var x = (x0 + x2) / 2;
+	    // var y = (y0 + y2) / 2;
+	    // x0 = x - rad / 2 * Math.cos(theta);
+	    // x1 = x - rad / 2 * Math.cos(theta + Math.PI);
+	    // x2 = x + rad / 2 * Math.cos(theta);
+	    // x3 = x + rad / 2 * Math.cos(theta + Math.PI);
+	    // y0 = y - rad / 2 * Math.sin(theta);
+	    // y1 = y - rad / 2 * Math.sin(theta + Math.PI);
+	    // y2 = y + rad / 2 * Math.sin(theta);
+	    // y3 = y + rad / 2 * Math.sin(theta + Math.PI);
+
+
+	    c.moveTo(x0, y0);
+	    c.lineTo(x0, y2);
+	    c.lineTo(x2, y2);
+	    c.lineTo(x2, y0);
+	    c.lineTo(x0, y0);
+	    shape.fillColor ? c.fill() : c.stroke();
+	    c.closePath();
+	  };
+
+	  var addBackground = function addBackground(data) {
+	    c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+	    // box({points: [{x: 0, y: 0}, {x: width, y: height}], fillColor: (localData.color || 'white')});
+	  };
+
+	  var addStyle = function addStyle(shape) {
+	    if (shape.strokeColor) {
+	      c.strokeStyle = shape.strokeColor;
+	    } else {
+	      c.strokeStyle = 'black';
+	    }
+	    if (shape.fillColor) {
+	      c.fillStyle = shape.fillColor;
+	    } else {
+	      c.fillStyle = 'black';
+	    }
+	    if (shape.lineJoin) {
+	      c.lineJoin = shape.lineJoin;
+	    } else {
+	      c.lineJoin = 'round';
+	    }
+	    if (shape.lineCap) {
+	      c.lineCap = shape.lineCap;
+	    } else {
+	      c.lineCap = 'round';
+	    }
+	    if (shape.lineWidth) {
+	      c.lineWidth = shape.lineWidth;
+	    } else {
+	      c.lineWidth = 1;
+	    }
+	  };
+
+	  // the render function takes in a data object.
+	  // Data has a shapes property which is an array
+	  // of all the shapes that need to be drawn.
+	  // It can also have a color property to define background color.
+	  return function render() {
+
+	    var localData = {
+	      color: drawer.data.color,
+	      shapes: drawer.data.shapes,
+	      currShape: drawer.data.currentShape,
+	      remoteShape: drawer.data.remoteShape
+	    };
+
+	    addBackground(localData);
+
+	    for (var shapeKey in localData.shapes) {
+	      var shape = localData.shapes[shapeKey];
+	      var type = shape.type;
+	      if (type === CIRCLE) {
+	        circle(shape);
+	      } else if (type === LINE) {
+	        line(shape);
+	      } else if (type === BOX) {
+	        box(shape);
+	      } else if (type === VECTOR) {
+	        vector(shape);
+	      }
+	    }
+
+	    var shape = localData.currShape;
+	    if (shape) {
+	      var type = shape.type;
+	      if (type === CIRCLE) {
+	        circle(shape);
+	      } else if (type === LINE) {
+	        line(shape);
+	      } else if (type === BOX) {
+	        box(shape);
+	      } else if (type === VECTOR) {
+	        vector(shape);
+	      }
+	    }
+
+	    var shape = localData.remoteShape;
+	    if (shape) {
+	      var type = shape.type;
+	      if (type === CIRCLE) {
+	        circle(shape);
+	      } else if (type === LINE) {
+	        line(shape);
+	      } else if (type === BOX) {
+	        box(shape);
+	      } else if (type === VECTOR) {
+	        vector(shape);
+	      }
+	    }
+
+	    window.requestAnimationFrame(render);
+	  };
+	};
+
+	exports.default = Render;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var initDrawer = function initDrawer() {
+	  var data = {
+	    color: 'aliceBlue',
+	    shapes: {},
+	    currentShape: null,
+	    newShapes: []
+	  };
+
+	  var ShapeTypes = { line: 'line', path: 'path', rect: 'rect', circle: 'circle' };
+	  var LineTypes = { round: 'round' };
+
+	  var Point = function Point(x, y) {
+	    _classCallCheck(this, Point);
+
+	    this.x = x;
+	    this.y = y;
+	  };
+
+	  var Shape = function Shape(type, points) {
+	    _classCallCheck(this, Shape);
+
+	    this.type = type;
+	    this.points = points;
+	    this.radius = 0;
+	    this.lineWidth = 2;
+	    this.lineJoin = LineTypes.round;
+	    this.lineCap = LineTypes.round;
+	    this.strokeColor = 'blue';
+	    this.fillColor = null;
+	  };
+
+	  var Drawer = function () {
+	    function Drawer(canvas, data) {
+	      _classCallCheck(this, Drawer);
+
+	      this.canvas = canvas;
+	      // this.shapes = shapes;
+	      this.data = data;
+	      data = this.data;
+	      this.isDrawing = false;
+	      this.currentShapeType = ShapeTypes.path;
+	      this.isSelecting = false;
+
+	      // keep this last so state is setup to hanlde drawing
+	      this.addListeners();
+	    }
+
+	    _createClass(Drawer, [{
+	      key: 'changeShapeType',
+	      value: function changeShapeType(type) {
+	        if (this.isSelecting) {
+	          this.toggleIsSelecting();
+	        }
+
+	        this.currentShapeType = type;
+	      }
+	    }, {
+	      key: 'toggleIsSelecting',
+	      value: function toggleIsSelecting() {
+	        this.isSelecting = !this.isSelecting;
+	        if (this.isSelecting) {
+	          this.canvas.style.cursor = 'pointer';
+	        } else {
+	          this.canvas.style.cursor = 'default';
+	        }
+	      }
+	    }, {
+	      key: 'getSelectedShape',
+	      value: function getSelectedShape(mousePoint) {
+	        // var selectedShape = null;
+
+	        // for (var i = 0; i < this.shapes.length; i++) {
+	        //   var shape = this.shapes[i];
+	        //   var testX, testY = false;
+
+	        //   if (shape.type === ShapeTypes.rect) {
+	        //     var p1 = shape.points[0];
+	        //     var p2 = shape.points[1];
+	        //     testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
+	        //     testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
+	        //   } else if (shape.type === ShapeTypes.circle) {
+	        //     // pythagorean theorem
+	        //     var center = shape.points[0];
+	        //     var a = mousePoint.x - center.x;
+	        //     var b = mousePoint.y - center.y;
+	        //     var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+	        //     testX = hyp < shape.radius;
+	        //     testY = hyp < shape.radius;
+	        //   }
+
+	        //   if (testX && testY) {
+	        //     console.log('GOT CIRCLE');
+	        //     selectedShape = shape;
+	        //     break;
+	        //   }
+	        // }
+
+	        // this.currentShape = selectedShape;
+	      }
+	    }, {
+	      key: 'moveSelectedShape',
+	      value: function moveSelectedShape(mousePoint) {}
+	      // var shape = this.currentShape;
+
+	      // if (!shape) {
+	      //   return;
+	      // }
+
+	      // if (shape.type === ShapeTypes.rect) {
+	      //   var p1 = shape.points[0];
+	      //   var p2 = shape.points[1];
+	      //   var width = p2.x - p1.x;
+	      //   var height = p2.y - p1.y;
+
+	      //   p1.x = mousePoint.x;
+	      //   p1.y = mousePoint.y;
+	      //   p2.x = mousePoint.x + width;
+	      //   p2.y = mousePoint.y + height;
+	      // } else if (shape.type === ShapeTypes.circle) {
+	      //   shape.points[0] = mousePoint;
+	      // }
+
+
+	      // mouse events & helpers ###########
+
+	    }, {
+	      key: 'getMousePoint',
+	      value: function getMousePoint(e) {
+	        var rect = canvas.getBoundingClientRect();
+	        // get the mouse point and remove offset of canvas in window
+	        var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	        var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+	        return new Point(x, y);
+	      }
+	    }, {
+	      key: 'handleMouseUp',
+	      value: function handleMouseUp(e) {
+	        this.isDrawing = false;
+	        var shape = this.data.currentShape;
+
+	        if (shape && (shape.mode === ShapeTypes.rect || shape.mode === ShapeTypes.line)) {
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+	          var point = this.getMousePoint(e);
+	          shape.points.push(point);
+	        }
+
+	        this.data.newShapes.push(shape);
+	        this.data.currentShape = null;
+	      }
+	    }, {
+	      key: 'handleMouseDown',
+	      value: function handleMouseDown(e) {
+	        this.isDrawing = true;
+	        var mousePoint = this.getMousePoint(e);
+
+	        // if we are selecting
+	        if (this.isSelecting) {
+	          this.getSelectedShape(mousePoint);
+	          return;
+	        }
+
+	        var points = [mousePoint];
+	        this.data.currentShape = new Shape(this.currentShapeType, points);
+	        // this.shapes.push(this.currentShape);
+	      }
+	    }, {
+	      key: 'handleMouseMove',
+	      value: function handleMouseMove(e) {
+
+	        if (!this.isDrawing) {
+	          return;
+	        }
+	        var mousePoint = this.getMousePoint(e);
+	        var shape = this.data.currentShape;
+
+	        if (this.isSelecting) {
+	          this.moveSelectedShape(mousePoint);
+	          return;
+	        }
+
+	        if (shape.type === ShapeTypes.path) {
+	          // paths get every point of move
+	          shape.points.push(mousePoint);
+	        } else if (shape.type === ShapeTypes.rect) {
+	          // rect's only have 2 points max
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+
+	          shape.points.push(mousePoint);
+	        } else if (shape.type === ShapeTypes.circle) {
+	          // circles have one center point and a radius
+	          var center = shape.points[0];
+	          var distX = mousePoint.x - center.x;
+	          var distY = mousePoint.y - center.y;
+	          shape.radius = Math.abs(distX > distY ? distX : distY);
+	        } else if (shape.type === ShapeTypes.line) {
+	          // lines have 2 points max
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+
+	          shape.points.push(mousePoint);
+	        }
+	      }
+	    }, {
+	      key: 'addListeners',
+	      value: function addListeners() {
+	        this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
+	        this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
+	        this.canvas.addEventListener('mouseout', function () {
+	          this.isDrawing = false;
+	        }.bind(this));
+	        this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
+	      }
+	    }]);
+
+	    return Drawer;
+	  }();
+
+	  var canvas = document.getElementById('draw-canvas');
+
+	  return new Drawer(canvas, data);
+	};
+
+	exports.default = initDrawer;
 
 /***/ }
 /******/ ]);

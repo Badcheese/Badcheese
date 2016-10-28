@@ -1,4 +1,4 @@
-var Render = function Render(canvasId) {
+var Render = function Render(canvasId, drawer) {
   const id = canvasId;
   const CIRCLE = 'circle';
   const LINE = 'path';
@@ -7,7 +7,6 @@ var Render = function Render(canvasId) {
   const c = document.getElementById(id).getContext('2d');
   const height = c.canvas.height;
   const width = c.canvas.width;
-  var localData;
 
   // {
   //   type: 'circle', //required STRING
@@ -172,11 +171,11 @@ var Render = function Render(canvasId) {
   // It can also have a color property to define background color.
   return function render() {
 
-    localData = {
-      color: window.data.color,
-      shapes: window.data.shapes,
-      currShape: window.data.currentShape,
-      remoteShape: window.data.remoteShape
+    var localData = {
+      color: drawer.data.color,
+      shapes: drawer.data.shapes,
+      currShape: drawer.data.currentShape,
+      remoteShape: drawer.data.remoteShape
     };
 
     addBackground(localData);
@@ -226,3 +225,5 @@ var Render = function Render(canvasId) {
     window.requestAnimationFrame(render);
   };
 };
+
+export default Render;

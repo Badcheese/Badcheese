@@ -6,7 +6,7 @@ var BUILD_DIR = path.resolve(__dirname, 'client/src/public');
 var APP_DIR = path.resolve(__dirname, 'client/src/app');
 
 var config = {
-  entry: APP_DIR + '/index.jsx',
+  entry: APP_DIR + '/App.jsx',
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
@@ -15,21 +15,22 @@ var config = {
     extenstions: ['', '.js', '.jsx']
   },
   externals: {
-      'cheerio': 'window',
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true,
+    'cheerio': 
+    'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
   },
   module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          loader: 'babel-loader',
-          query: {
-              presets: ['es2015', 'react', 'stage-0']
-            },
-          exclude: /node_modules/,
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-0']
         },
-      ],
+        exclude: /node_modules/,
+      },
+    ],
   },
   watch: true
 };
