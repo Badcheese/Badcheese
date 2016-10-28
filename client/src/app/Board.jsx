@@ -8,6 +8,9 @@ import initDrawer from '../../drawer.js';
 class Board extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      draw: null
+    }
   }
 
   componentDidMount() {
@@ -16,7 +19,7 @@ class Board extends React.Component {
     const socket = io();
 
     const drawer = initDrawer();
-    this.drawer = drawer;
+    this.setState({ draw: drawer })
     const render = Render('draw-canvas', drawer);
 
     var loadChange = function loadChange(serverData) {
@@ -89,21 +92,12 @@ class Board extends React.Component {
         <h1>Drawmie</h1>
         <div>
           <div className="container-fluid" style={tools}>
-            <ToolBar />
+            <ToolBar draw={ this.state.draw } />
           </div>
             <Nav style={nav}/>
           <div className="container-fluid" style={container} >
             <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
           </div>
-        </div>
-
-        <div id='tools'>
-          Tools:
-          <a onClick={function() { this.drawer.toggleIsSelecting(); }.bind(this)} href='#'>Select Tool</a>
-          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.line); }.bind(this)} href='#'>Line</a>
-          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.path); }.bind(this)} href='#'>Path</a>
-          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.rect); }.bind(this)} href='#'>Rect</a>
-          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.circle); }.bind(this)} href='#'>Circle</a>
         </div>
       </div>
     );
@@ -111,3 +105,6 @@ class Board extends React.Component {
 }
 
 export default Board;
+
+
+          
