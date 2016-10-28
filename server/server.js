@@ -46,12 +46,14 @@ server.listen(port, () => {
 io.on('connection', (socket) => {
   socket.on('addMeToRoom', (id) => {
     const liveBoard = util.doGetBoard(id);
-    socket.join(id);
-    io.to(id).emit('renderme', liveBoard.board);
-    socket.on('clientDrawing', (data) => {
-      liveBoard.loadChange(data, function(changes) {
-        io.to(id).emit('renderme', changes);
+    if (liveBoard) {  
+      socket.join(id);
+      io.to(id).emit('renderme', liveBoard.board);
+      socket.on('clientDrawing', (data) => {
+        liveBoard.loadChange(data, function(changes) {
+          io.to(id).emit('renderme', changes);
+        });
       });
-    });
+    }
   });
 });
