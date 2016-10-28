@@ -21,9 +21,15 @@ const LiveBoard = () => {
           this.board.next++;
         }.bind(this));
       }
-
       if (change.currentShape) {
         emitChange.currentShape = change.currentShape;
+      }
+      if (change.shapes) {
+        for (var key in change.shapes) {
+          const shape = change.shapes[key];
+          this.board.shapes[key] = shape;
+          emitChange.shapes[key] = shape;
+        }
       }
 
       emit(emitChange);
