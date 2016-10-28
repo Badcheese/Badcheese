@@ -10,6 +10,7 @@ var ToolBar = ({ draw }) => (
         <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.rect)}>Rect</li>
         <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.line)}>Line</li>
         <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.circle)}>Circle</li>
+        <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.path)}>Path</li>
       </ul>
     </div>
   </nav>
