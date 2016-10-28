@@ -8,3 +8,15 @@ html, body {
 canvas {
   background-color: aliceblue;
 }
+
+.drawmie-input {
+  text-align: center;
+}
+
+.drawmie-join {
+  margin-top: 25%;
+}
+
+.drawmie-button {
+  margin-top: 10%;
+}
