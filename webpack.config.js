@@ -15,7 +15,7 @@ var config = {
     extenstions: ['', '.js', '.jsx']
   },
   externals: {
-    'cheerio': 
+    'cheerio':
     'window',
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true,
@@ -30,6 +30,10 @@ var config = {
         },
         exclude: /node_modules/,
       },
+      // {
+      //   test: /\.less$/,
+      //   loader: 'style!css!less',
+      // },
     ],
   },
   watch: true
