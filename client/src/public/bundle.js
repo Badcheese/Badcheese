@@ -19868,6 +19868,10 @@
 
 	var _render2 = _interopRequireDefault(_render);
 
+	var _drawer = __webpack_require__(164);
+
+	var _drawer2 = _interopRequireDefault(_drawer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19892,31 +19896,32 @@
 
 	      var socket = io();
 
-	      var render = (0, _render2.default)('draw-canvas');
+	      var drawer = (0, _drawer2.default)();
+	      var render = (0, _render2.default)('draw-canvas', drawer);
 
 	      var loadChange = function loadChange(serverData) {
 	        if (serverData.color) {
-	          window.data.color = serverData.color;
+	          drawer.data.color = serverData.color;
 	        }
 	        if (serverData.shapes) {
 	          for (var key in serverData.shapes) {
-	            data.shapes[key] = serverData.shapes[key];
+	            drawer.data.shapes[key] = serverData.shapes[key];
 	          }
 	        }
 
 	        if (serverData.currentShape) {
-	          window.data.remoteShape = serverData.currentShape;
+	          drawer.data.remoteShape = serverData.currentShape;
 	        }
 	      };
 
 	      var tick = function tick() {
 	        var myDraw = {
 	          color: 'aliceBlue',
-	          newShapes: data.newShapes,
-	          currentShape: data.currentShape
+	          newShapes: drawer.data.newShapes,
+	          currentShape: drawer.data.currentShape
 	        };
-	        if (data.newShapes.length > 0) {
-	          data.newShapes = [];
+	        if (drawer.data.newShapes.length > 0) {
+	          drawer.data.newShapes = [];
 	        }
 	        socket.emit('clientDrawing', myDraw);
 	      };
@@ -19928,12 +19933,10 @@
 	      setInterval(tick, 250);
 	      window.requestAnimationFrame(render);
 
-	      socket.on('boardId', function (data) {
-	        console.log(data);
-	        socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
-	      });
-
-	      initDrawer();
+	      // socket.on('boardId', function (data) {
+	      //   console.log(data);
+	      //   socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
+	      // });
 	    }
 	  }, {
 	    key: 'updateCanvas',
@@ -20132,7 +20135,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var Render = function Render(canvasId) {
+	var Render = function Render(canvasId, drawer) {
 	  var id = canvasId;
 	  var CIRCLE = 'circle';
 	  var LINE = 'path';
@@ -20141,7 +20144,6 @@
 	  var c = document.getElementById(id).getContext('2d');
 	  var height = c.canvas.height;
 	  var width = c.canvas.width;
-	  var localData;
 
 	  // {
 	  //   type: 'circle', //required STRING
@@ -20305,11 +20307,11 @@
 	  // It can also have a color property to define background color.
 	  return function render() {
 
-	    localData = {
-	      color: window.data.color,
-	      shapes: window.data.shapes,
-	      currShape: window.data.currentShape,
-	      remoteShape: window.data.remoteShape
+	    var localData = {
+	      color: drawer.data.color,
+	      shapes: drawer.data.shapes,
+	      currShape: drawer.data.currentShape,
+	      remoteShape: drawer.data.remoteShape
 	    };
 
 	    addBackground(localData);
@@ -20361,6 +20363,249 @@
 	};
 
 	exports.default = Render;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var initDrawer = function initDrawer() {
+	  var data = {
+	    color: 'aliceBlue',
+	    shapes: {},
+	    currentShape: null,
+	    newShapes: []
+	  };
+
+	  var ShapeTypes = { line: 'line', path: 'path', rect: 'rect', circle: 'circle' };
+	  var LineTypes = { round: 'round' };
+
+	  var Point = function Point(x, y) {
+	    _classCallCheck(this, Point);
+
+	    this.x = x;
+	    this.y = y;
+	  };
+
+	  var Shape = function Shape(type, points) {
+	    _classCallCheck(this, Shape);
+
+	    this.type = type;
+	    this.points = points;
+	    this.radius = 0;
+	    this.lineWidth = 2;
+	    this.lineJoin = LineTypes.round;
+	    this.lineCap = LineTypes.round;
+	    this.strokeColor = 'blue';
+	    this.fillColor = null;
+	  };
+
+	  var Drawer = function () {
+	    function Drawer(canvas, data) {
+	      _classCallCheck(this, Drawer);
+
+	      this.canvas = canvas;
+	      // this.shapes = shapes;
+	      this.data = data;
+	      data = this.data;
+	      this.isDrawing = false;
+	      this.currentShapeType = ShapeTypes.path;
+	      this.isSelecting = false;
+
+	      // keep this last so state is setup to hanlde drawing
+	      this.addListeners();
+	    }
+
+	    _createClass(Drawer, [{
+	      key: 'changeShapeType',
+	      value: function changeShapeType(type) {
+	        if (this.isSelecting) {
+	          this.toggleIsSelecting();
+	        }
+
+	        this.currentShapeType = type;
+	      }
+	    }, {
+	      key: 'toggleIsSelecting',
+	      value: function toggleIsSelecting() {
+	        this.isSelecting = !this.isSelecting;
+	        if (this.isSelecting) {
+	          this.canvas.style.cursor = 'pointer';
+	        } else {
+	          this.canvas.style.cursor = 'default';
+	        }
+	      }
+	    }, {
+	      key: 'getSelectedShape',
+	      value: function getSelectedShape(mousePoint) {
+	        // var selectedShape = null;
+
+	        // for (var i = 0; i < this.shapes.length; i++) {
+	        //   var shape = this.shapes[i];
+	        //   var testX, testY = false;
+
+	        //   if (shape.type === ShapeTypes.rect) {
+	        //     var p1 = shape.points[0];
+	        //     var p2 = shape.points[1];
+	        //     testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
+	        //     testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
+	        //   } else if (shape.type === ShapeTypes.circle) {
+	        //     // pythagorean theorem
+	        //     var center = shape.points[0];
+	        //     var a = mousePoint.x - center.x;
+	        //     var b = mousePoint.y - center.y;
+	        //     var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+	        //     testX = hyp < shape.radius;
+	        //     testY = hyp < shape.radius;
+	        //   }
+
+	        //   if (testX && testY) {
+	        //     console.log('GOT CIRCLE');
+	        //     selectedShape = shape;
+	        //     break;
+	        //   }
+	        // }
+
+	        // this.currentShape = selectedShape;
+	      }
+	    }, {
+	      key: 'moveSelectedShape',
+	      value: function moveSelectedShape(mousePoint) {}
+	      // var shape = this.currentShape;
+
+	      // if (!shape) {
+	      //   return;
+	      // }
+
+	      // if (shape.type === ShapeTypes.rect) {
+	      //   var p1 = shape.points[0];
+	      //   var p2 = shape.points[1];
+	      //   var width = p2.x - p1.x;
+	      //   var height = p2.y - p1.y;
+
+	      //   p1.x = mousePoint.x;
+	      //   p1.y = mousePoint.y;
+	      //   p2.x = mousePoint.x + width;
+	      //   p2.y = mousePoint.y + height;
+	      // } else if (shape.type === ShapeTypes.circle) {
+	      //   shape.points[0] = mousePoint;
+	      // }
+
+
+	      // mouse events & helpers ###########
+
+	    }, {
+	      key: 'getMousePoint',
+	      value: function getMousePoint(e) {
+	        var rect = canvas.getBoundingClientRect();
+	        // get the mouse point and remove offset of canvas in window
+	        var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+	        var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+	        return new Point(x, y);
+	      }
+	    }, {
+	      key: 'handleMouseUp',
+	      value: function handleMouseUp(e) {
+	        this.isDrawing = false;
+	        var shape = this.data.currentShape;
+
+	        if (shape && (shape.mode === ShapeTypes.rect || shape.mode === ShapeTypes.line)) {
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+	          var point = this.getMousePoint(e);
+	          shape.points.push(point);
+	        }
+
+	        this.data.newShapes.push(shape);
+	        this.data.currentShape = null;
+	      }
+	    }, {
+	      key: 'handleMouseDown',
+	      value: function handleMouseDown(e) {
+	        this.isDrawing = true;
+	        var mousePoint = this.getMousePoint(e);
+
+	        // if we are selecting
+	        if (this.isSelecting) {
+	          this.getSelectedShape(mousePoint);
+	          return;
+	        }
+
+	        var points = [mousePoint];
+	        this.data.currentShape = new Shape(this.currentShapeType, points);
+	        // this.shapes.push(this.currentShape);
+	      }
+	    }, {
+	      key: 'handleMouseMove',
+	      value: function handleMouseMove(e) {
+
+	        if (!this.isDrawing) {
+	          return;
+	        }
+	        var mousePoint = this.getMousePoint(e);
+	        var shape = this.data.currentShape;
+
+	        if (this.isSelecting) {
+	          this.moveSelectedShape(mousePoint);
+	          return;
+	        }
+
+	        if (shape.type === ShapeTypes.path) {
+	          // paths get every point of move
+	          shape.points.push(mousePoint);
+	        } else if (shape.type === ShapeTypes.rect) {
+	          // rect's only have 2 points max
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+
+	          shape.points.push(mousePoint);
+	        } else if (shape.type === ShapeTypes.circle) {
+	          // circles have one center point and a radius
+	          var center = shape.points[0];
+	          var distX = mousePoint.x - center.x;
+	          var distY = mousePoint.y - center.y;
+	          shape.radius = Math.abs(distX > distY ? distX : distY);
+	        } else if (shape.type === ShapeTypes.line) {
+	          // lines have 2 points max
+	          if (shape.points.length > 1) {
+	            shape.points.pop();
+	          }
+
+	          shape.points.push(mousePoint);
+	        }
+	      }
+	    }, {
+	      key: 'addListeners',
+	      value: function addListeners() {
+	        this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
+	        this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
+	        this.canvas.addEventListener('mouseout', function () {
+	          this.isDrawing = false;
+	        }.bind(this));
+	        this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
+	      }
+	    }]);
+
+	    return Drawer;
+	  }();
+
+	  var canvas = document.getElementById('draw-canvas');
+
+	  return new Drawer(canvas, data);
+	};
+
+	exports.default = initDrawer;
 
 /***/ }
 /******/ ]);

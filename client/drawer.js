@@ -1,5 +1,5 @@
-window.initDrawer = function initDrawer() {
-  window.data = {
+var initDrawer = function initDrawer() {
+  var data = {
     color: 'aliceBlue',
     shapes: {},
     currentShape: null,
@@ -35,8 +35,8 @@ window.initDrawer = function initDrawer() {
       this.canvas = canvas;
       // this.shapes = shapes;
       this.data = data;
+      data = this.data;
       this.isDrawing = false;
-      data.currentShape = null;
       this.currentShapeType = ShapeTypes.path;
       this.isSelecting = false;
 
@@ -205,15 +205,9 @@ window.initDrawer = function initDrawer() {
     }
   }
 
-  window.Drawer = Drawer;
-  window.Shape = Shape;
-  window.Point = Point;
-  window.ShapeTypes = ShapeTypes;
-  window.LineTypes = LineTypes;
-
   var canvas = document.getElementById('draw-canvas');
 
-  if (canvas && !window.drawer) {
-    window.drawer = new Drawer(canvas, window.data);
-  }
+  return new Drawer(canvas, data);
 };
+
+export default initDrawer;

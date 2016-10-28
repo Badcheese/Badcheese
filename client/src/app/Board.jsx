@@ -2,6 +2,7 @@ import React from 'react';
 import ToolBar from './ToolBar.jsx';
 import Nav from './Nav.jsx';
 import Render from '../../render.js';
+import initDrawer from '../../drawer.js';
 
 
 class Board extends React.Component {
@@ -14,31 +15,32 @@ class Board extends React.Component {
 
     const socket = io();
 
-    const render = Render('draw-canvas');
+    const drawer = initDrawer();
+    const render = Render('draw-canvas', drawer);
 
     var loadChange = function loadChange(serverData) {
       if (serverData.color) {
-        window.data.color = serverData.color;
+        drawer.data.color = serverData.color;
       }
       if (serverData.shapes) {
         for (var key in serverData.shapes) {
-          data.shapes[key] = serverData.shapes[key];
+          drawer.data.shapes[key] = serverData.shapes[key];
         }
       }
 
       if (serverData.currentShape) {
-        window.data.remoteShape = serverData.currentShape;
+        drawer.data.remoteShape = serverData.currentShape;
       }
     };
 
     var tick = function tick() {
       var myDraw = {
         color: 'aliceBlue',
-        newShapes: data.newShapes,
-        currentShape: data.currentShape
+        newShapes: drawer.data.newShapes,
+        currentShape: drawer.data.currentShape
       };
-      if (data.newShapes.length > 0) {
-        data.newShapes = [];
+      if (drawer.data.newShapes.length > 0) {
+        drawer.data.newShapes = [];
       }
       socket.emit('clientDrawing', myDraw);
     };
@@ -50,12 +52,11 @@ class Board extends React.Component {
     setInterval(tick, 250);
     window.requestAnimationFrame(render);
 
-    socket.on('boardId', function (data) {
-      console.log(data);
-      socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
-    });
+    // socket.on('boardId', function (data) {
+    //   console.log(data);
+    //   socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
+    // });
 
-    initDrawer();
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
