@@ -60,13 +60,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Nav = __webpack_require__(159);
+	var _Landing = __webpack_require__(161);
 
-	var _Nav2 = _interopRequireDefault(_Nav);
+	var _Landing2 = _interopRequireDefault(_Landing);
 
-	var _ToolBar = __webpack_require__(160);
+	var _Board = __webpack_require__(162);
 
-	var _ToolBar2 = _interopRequireDefault(_ToolBar);
+	var _Board2 = _interopRequireDefault(_Board);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85,55 +85,56 @@
 	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	    // This line is important!
 	  }
+	  // componentDidMount() {
+	  //   this.updateCanvas();
+	  // }
+	  // updateCanvas() {
+	  //   const ctx = this.refs.canvas.getContext('2d');
+	  //   ctx.clearRect(0, 0, 750, 1000);
+	  // }
+	  // render() {
+	  //   const container = {
+	  //     marginLeft: '30%',
+	  //     paddingLeft: 30,
+	  //
+	  //     position: 'fixed'
+	  //   };
+	  //   const canvas = {
+	  //     border: '15px solid gray',
+	  //     borderRadius: '5px',
+	  //   };
+	  //   const tools = {
+	  //     listStyleType: 'none',
+	  //     marginTop: '85px',
+	  //     position: 'fixed'
+	  //   };
+	  //   const nav = {
+	  //     marginLeft: '-25px',
+	  //     color: 'red'
+	  //   };
+
+	  // return (
+	  //   <div>
+	  //     <div className="container-fluid" style={tools}>
+	  //       <ToolBar />
+	  //     </div>
+	  //       <Nav style={nav}/>
+	  //     <div className="container-fluid" style={container} >
+	  //       <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
+	  //     </div>
+	  //   </div>
+	  //   );
+	  // }
+	  //
+
 
 	  _createClass(App, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.updateCanvas();
-	    }
-	  }, {
-	    key: 'updateCanvas',
-	    value: function updateCanvas() {
-	      var ctx = this.refs.canvas.getContext('2d');
-	      ctx.clearRect(0, 0, 750, 1000);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var container = {
-	        marginLeft: '30%',
-	        paddingLeft: 30,
-
-	        position: 'fixed'
-	      };
-	      var canvas = {
-	        border: '15px solid gray',
-	        borderRadius: '5px'
-	      };
-	      var tools = {
-	        listStyleType: 'none',
-	        marginTop: '85px',
-	        position: 'fixed'
-	      };
-	      var nav = {
-	        marginLeft: '-25px',
-	        color: 'red'
-	      };
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid', style: tools },
-	          _react2.default.createElement(_ToolBar2.default, null)
-	        ),
-	        _react2.default.createElement(_Nav2.default, { style: nav }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid', style: container },
-	          _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
-	        )
+	        _react2.default.createElement(_Board2.default, null)
 	      );
 	    }
 	  }]);
@@ -144,7 +145,7 @@
 	exports.default = App;
 
 
-	_reactDom2.default.render(_react2.default.createElement(App, { cool: "really boring text" }), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement(App, { cool: 'really boring text' }), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -19936,6 +19937,127 @@
 	};
 
 	exports.default = ToolBar;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var Landing = function Landing() {
+	  return React.createElement(
+	    "center",
+	    null,
+	    React.createElement(
+	      "h1",
+	      null,
+	      "Drawmie Fam"
+	    ),
+	    React.createElement(
+	      "button",
+	      null,
+	      "Click Me Fam"
+	    )
+	  );
+	};
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ToolBar = __webpack_require__(160);
+
+	var _ToolBar2 = _interopRequireDefault(_ToolBar);
+
+	var _Nav = __webpack_require__(159);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Board = function (_React$Component) {
+	  _inherits(Board, _React$Component);
+
+	  function Board(props) {
+	    _classCallCheck(this, Board);
+
+	    return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+	  }
+
+	  _createClass(Board, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.updateCanvas();
+	    }
+	  }, {
+	    key: 'updateCanvas',
+	    value: function updateCanvas() {
+	      var ctx = this.refs.canvas.getContext('2d');
+	      ctx.clearRect(0, 0, 750, 1000);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var container = {
+	        marginLeft: '30%',
+	        paddingLeft: 30,
+
+	        position: 'fixed'
+	      };
+	      var canvas = {
+	        border: '15px solid gray',
+	        borderRadius: '5px'
+	      };
+	      var tools = {
+	        listStyleType: 'none',
+	        marginTop: '85px',
+	        position: 'fixed'
+	      };
+	      var nav = {
+	        marginLeft: '-25px',
+	        color: 'red'
+	      };
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid', style: tools },
+	          _react2.default.createElement(_ToolBar2.default, null)
+	        ),
+	        _react2.default.createElement(_Nav2.default, { style: nav }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid', style: container },
+	          _react2.default.createElement('canvas', { id: 'draw-canvas', style: canvas, ref: 'canvas', width: 500, height: 500 })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Board;
+	}(_react2.default.Component);
+
+	exports.default = Board;
 
 /***/ }
 /******/ ]);

@@ -1,15 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Nav from './Nav.jsx';
 import ToolBar from './ToolBar.jsx';
+import Nav from './Nav.jsx';
 
-class App extends React.Component {
+
+class Board extends React.Component {
   constructor(props) {
     super(props);
-    // This line is important!
   }
+
   componentDidMount() {
-         this.updateCanvas();
+    this.updateCanvas();
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
@@ -19,12 +19,12 @@ class App extends React.Component {
     const container = {
       marginLeft: '30%',
       paddingLeft: 30,
-      
+
       position: 'fixed'
     };
     const canvas = {
       border: '15px solid gray',
-      borderRadius: '5px' ,
+      borderRadius: '5px',
     };
     const tools = {
       listStyleType: 'none',
@@ -46,10 +46,8 @@ class App extends React.Component {
           <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
         </div>
       </div>
-      );
+    );
   }
 }
 
-export default App;
-
-ReactDOM.render(<App cool={"really boring text"}/>, document.getElementById('root'));
+export default Board;
