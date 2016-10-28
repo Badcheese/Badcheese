@@ -19897,6 +19897,7 @@
 	      var socket = io();
 
 	      var drawer = (0, _drawer2.default)();
+	      this.drawer = drawer;
 	      var render = (0, _render2.default)('draw-canvas', drawer);
 
 	      var loadChange = function loadChange(serverData) {
@@ -19996,27 +19997,37 @@
 	          'Tools:',
 	          _react2.default.createElement(
 	            'a',
-	            { onclick: 'drawer.toggleIsSelecting()', href: '#' },
+	            { onClick: function () {
+	                this.drawer.toggleIsSelecting();
+	              }.bind(this), href: '#' },
 	            'Select Tool'
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { onclick: 'drawer.changeShapeType(ShapeTypes.line)', href: '#' },
+	            { onClick: function () {
+	                this.drawer.changeShapeType(this.drawer.ShapeTypes.line);
+	              }.bind(this), href: '#' },
 	            'Line'
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { onclick: 'drawer.changeShapeType(ShapeTypes.path)', href: '#' },
+	            { onClick: function () {
+	                this.drawer.changeShapeType(this.drawer.ShapeTypes.path);
+	              }.bind(this), href: '#' },
 	            'Path'
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { onclick: 'drawer.changeShapeType(ShapeTypes.rect)', href: '#' },
+	            { onClick: function () {
+	                this.drawer.changeShapeType(this.drawer.ShapeTypes.rect);
+	              }.bind(this), href: '#' },
 	            'Rect'
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { onclick: 'drawer.changeShapeType(ShapeTypes.circle)', href: '#' },
+	            { onClick: function () {
+	                this.drawer.changeShapeType(this.drawer.ShapeTypes.circle);
+	              }.bind(this), href: '#' },
 	            'Circle'
 	          )
 	        )
@@ -20420,7 +20431,8 @@
 	      this.isDrawing = false;
 	      this.currentShapeType = ShapeTypes.path;
 	      this.isSelecting = false;
-
+	      this.ShapeTypes = ShapeTypes;
+	      this.LineTypes = LineTypes;
 	      // keep this last so state is setup to hanlde drawing
 	      this.addListeners();
 	    }

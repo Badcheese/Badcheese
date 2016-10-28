@@ -39,7 +39,8 @@ var initDrawer = function initDrawer() {
       this.isDrawing = false;
       this.currentShapeType = ShapeTypes.path;
       this.isSelecting = false;
-
+      this.ShapeTypes = ShapeTypes;
+      this.LineTypes = LineTypes;
       // keep this last so state is setup to hanlde drawing
       this.addListeners();
     }

@@ -16,6 +16,7 @@ class Board extends React.Component {
     const socket = io();
 
     const drawer = initDrawer();
+    this.drawer = drawer;
     const render = Render('draw-canvas', drawer);
 
     var loadChange = function loadChange(serverData) {
@@ -98,11 +99,11 @@ class Board extends React.Component {
 
         <div id='tools'>
           Tools:
-          <a onclick="drawer.toggleIsSelecting()" href='#'>Select Tool</a>
-          <a onclick="drawer.changeShapeType(ShapeTypes.line)" href='#'>Line</a>
-          <a onclick="drawer.changeShapeType(ShapeTypes.path)" href='#'>Path</a>
-          <a onclick="drawer.changeShapeType(ShapeTypes.rect)" href='#'>Rect</a>
-          <a onclick="drawer.changeShapeType(ShapeTypes.circle)" href='#'>Circle</a>
+          <a onClick={function() { this.drawer.toggleIsSelecting(); }.bind(this)} href='#'>Select Tool</a>
+          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.line); }.bind(this)} href='#'>Line</a>
+          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.path); }.bind(this)} href='#'>Path</a>
+          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.rect); }.bind(this)} href='#'>Rect</a>
+          <a onClick={function() { this.drawer.changeShapeType(this.drawer.ShapeTypes.circle); }.bind(this)} href='#'>Circle</a>
         </div>
       </div>
     );
