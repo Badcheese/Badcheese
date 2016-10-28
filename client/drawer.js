@@ -63,66 +63,66 @@ var initDrawer = function initDrawer() {
     }
 
     getSelectedShape(mousePoint) {
-      // var selectedShape = null;
+      var selectedShape = null;
 
-      // for (var i = 0; i < this.shapes.length; i++) {
-      //   var shape = this.shapes[i];
-      //   var testX, testY = false;
+      for (var key in this.data.shapes) {
+        var shape = this.data.shapes[key];
+        var testX, testY = false;
 
-      //   if (shape.type === ShapeTypes.rect) {
-      //     var p1 = shape.points[0];
-      //     var p2 = shape.points[1];
-      //     testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
-      //     testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
-      //   } else if (shape.type === ShapeTypes.circle) {
-      //     // pythagorean theorem
-      //     var center = shape.points[0];
-      //     var a = mousePoint.x - center.x;
-      //     var b = mousePoint.y - center.y;
-      //     var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-      //     testX = hyp < shape.radius;
-      //     testY = hyp < shape.radius;
-      //   }
+        if (shape.type === ShapeTypes.rect && shape.points.length > 1) {
+          var p1 = shape.points[0];
+          var p2 = shape.points[1];
+          testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
+          testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
+        } else if (shape.type === ShapeTypes.circle) {
+          // pythagorean theorem
+          var center = shape.points[0];
+          var a = mousePoint.x - center.x;
+          var b = mousePoint.y - center.y;
+          var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+          testX = hyp < shape.radius;
+          testY = hyp < shape.radius;
+        }
 
-      //   if (testX && testY) {
-      //     console.log('GOT CIRCLE');
-      //     selectedShape = shape;
-      //     break;
-      //   }
-      // }
+        if (testX && testY) {
+          selectedShape = shape;
+          break;
+        }
+      }
 
-      // this.currentShape = selectedShape;
+      this.data.currentShape = selectedShape;
     }
 
     moveSelectedShape(mousePoint) {
-      // var shape = this.currentShape;
+      var shape = this.data.currentShape;
 
-      // if (!shape) {
-      //   return;
-      // }
+      if (!shape) {
+        return;
+      }
 
-      // if (shape.type === ShapeTypes.rect) {
-      //   var p1 = shape.points[0];
-      //   var p2 = shape.points[1];
-      //   var width = p2.x - p1.x;
-      //   var height = p2.y - p1.y;
+      if (shape.type === ShapeTypes.rect) {
+        var p1 = shape.points[0];
+        var p2 = shape.points[1];
+        var width = p2.x - p1.x;
+        var height = p2.y - p1.y;
 
-      //   p1.x = mousePoint.x;
-      //   p1.y = mousePoint.y;
-      //   p2.x = mousePoint.x + width;
-      //   p2.y = mousePoint.y + height;
-      // } else if (shape.type === ShapeTypes.circle) {
-      //   shape.points[0] = mousePoint;
-      // }
+        p1.x = mousePoint.x;
+        p1.y = mousePoint.y;
+        p2.x = mousePoint.x + width;
+        p2.y = mousePoint.y + height;
+      } else if (shape.type === ShapeTypes.circle) {
+        shape.points[0] = mousePoint;
+      }
     }
+
 
     // mouse events & helpers ###########
 
     getMousePoint(e) {
-      var rect = canvas.getBoundingClientRect();
+      var rect = this.canvas.getBoundingClientRect();
       // get the mouse point and remove offset of canvas in window
-      var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
-      var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+      var x = (e.clientX - rect.left) / (rect.right - rect.left) * this.canvas.width;
+      var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * this.canvas.height;
       return new Point(x, y);
     }
 
