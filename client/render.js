@@ -226,3 +226,5 @@ var Render = function Render(canvasId) {
     window.requestAnimationFrame(render);
   };
 };
+
+export default Render;

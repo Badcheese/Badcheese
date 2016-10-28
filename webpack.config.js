@@ -15,21 +15,22 @@ var config = {
     extenstions: ['', '.js', '.jsx']
   },
   externals: {
-      'cheerio': 'window',
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true,
+    'cheerio': 
+    'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
   },
   module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          loader: 'babel-loader',
-          query: {
-              presets: ['es2015', 'react', 'stage-0']
-            },
-          exclude: /node_modules/,
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-0']
         },
-      ],
+        exclude: /node_modules/,
+      },
+    ],
   },
   watch: true
 };

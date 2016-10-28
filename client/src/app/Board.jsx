@@ -1,6 +1,7 @@
 import React from 'react';
 import ToolBar from './ToolBar.jsx';
 import Nav from './Nav.jsx';
+import Render from '../../render.js';
 
 
 class Board extends React.Component {
@@ -13,7 +14,7 @@ class Board extends React.Component {
 
     const socket = io();
 
-    window.render = Render('draw-canvas');
+    const render = Render('draw-canvas');
 
     var loadChange = function loadChange(serverData) {
       if (serverData.color) {
