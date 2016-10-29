@@ -13,6 +13,16 @@ var ToolBar = ({ draw }) => (
         <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.path)}>Path</li>
       </ul>
     </div>
+    <div className="container">
+      <ul className="toolList" id="tools">
+        <li className="tools" onClick={() => draw.toggleStrokeFill()}>Toggle: Stroke or Fill</li>
+        <li className="tools" onClick={() => draw.changeColor(draw.Colors.black)}>Black</li>
+        <li className="tools" onClick={() => draw.changeColor(draw.Colors.red)}>Red</li>
+        <li className="tools" onClick={() => draw.changeColor(draw.Colors.yellow)}>Yellow</li>
+        <li className="tools" onClick={() => draw.changeColor(draw.Colors.green)}>Green</li>
+        <li className="tools" onClick={() => draw.changeColor(draw.Colors.purple)}>Purple</li>
+      </ul>
+    </div>
   </nav>
 );
 
