@@ -5,4 +5,4 @@
 node_modules
 bower_components
 
-/client/src/public/bundle.js
+**/public

@@ -7,6 +7,7 @@ var APP_DIR = path.resolve(__dirname, 'client/src/app');
 
 var config = {
   entry: APP_DIR + '/App.jsx',
+  devtool: 'source-map',
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
@@ -29,11 +30,7 @@ var config = {
           presets: ['es2015', 'react', 'stage-0']
         },
         exclude: /node_modules/,
-      },
-      // {
-      //   test: /\.less$/,
-      //   loader: 'style!css!less',
-      // },
+      }
     ],
   },
   watch: true
