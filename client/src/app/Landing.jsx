@@ -4,6 +4,7 @@ import {Grid, Row, Col, Clearfix, Button, Panel, Tooltip, ButtonToolbar, Overlay
 import Form from './LandingForm.jsx';
 
 const Landing = (props) => {
+  const origin = window.location.origin;
   const App = props.App;
   const newBoard = () => {
     console.log('button clicked');
@@ -13,7 +14,7 @@ const Landing = (props) => {
       window.location.hash = newBoardId;
       ReactDOM.render(<App />, document.getElementById('root'));
     });
-    requestBoard.open('GET', 'http://localhost:3000/board');
+    requestBoard.open('GET', origin + '/board');
     requestBoard.send();
   };
 
