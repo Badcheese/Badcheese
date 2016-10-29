@@ -1,5 +1,5 @@
 import React from 'react';
-import ToolBar from './ToolBar.jsx';
+import ToolBar from './Toolbar.jsx';
 import Nav from './Nav.jsx';
 import Render from '../../render.js';
 import initDrawer from '../../drawer.js';
@@ -31,7 +31,7 @@ class Board extends React.Component {
       if (serverData.shapes) {
         for (var key in serverData.shapes) {
           var serverShape = serverData.shapes[key];
-          console.log("server shape: ", serverShape.guid);
+          console.log('server shape: ', serverShape.guid);
           drawer.data.shapes[key] = serverData.shapes[key];
         }
       }
