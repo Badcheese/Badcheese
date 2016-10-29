@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Grid, Row, Col, Clearfix, Button, Panel} from 'react-bootstrap';
+import {Grid, Row, Col, Clearfix, Button, Panel, Tooltip, ButtonToolbar, OverlayTrigger} from 'react-bootstrap';
 import Form from './LandingForm.jsx';
 
 const Landing = (props) => {
@@ -17,18 +17,29 @@ const Landing = (props) => {
     requestBoard.send();
   };
 
+  const tooltip = (
+  <Tooltip id="tooltip"><strong>Start a new Drawmie!</strong></Tooltip>
+);
+
   const gridInstance = (
   <Grid>
     <Row className="show-grid">
       <Col xs={6} md={4}></Col>
       <Col xs={6} md={4}>
+      <div className='drawmie-title'>
         <center>
           <h1>Drawmie</h1>
-          <Button className="drawmie-button" bsStyle="primary" bsSize="large" onClick={newBoard}>New Drawmie</Button>
+          <ButtonToolbar>
+          <OverlayTrigger placement="bottom" overlay={tooltip}>
+            <Button className="drawmie-button" bsStyle="primary" bsSize="large" onClick={newBoard}>New Drawmie</Button>
+          </OverlayTrigger>
+          </ButtonToolbar>
         </center>
+
         <Panel className="drawmie-join" header='Join A Drawmie'>
           <Form />
         </Panel>
+        </div>
       </Col>
       <Col xs={6} md={4}></Col>
     </Row>

@@ -5,6 +5,10 @@ html, body {
   height: 100%;
 }
 
+h1 {
+  font-size: 3.5em;
+}
+
 canvas {
   background-color: aliceblue;
 }
@@ -13,10 +17,19 @@ canvas {
   text-align: center;
 }
 
+.btn-toolbar>.btn, .btn-toolbar>.btn-group, .btn-toolbar>.input-group {
+  margin-left: 105px !important;
+}
+
 .drawmie-join {
   margin-top: 25%;
 }
 
 .drawmie-button {
   margin-top: 10%;
+  margin-left: 10%
+}
+
+.drawmie-title {
+  font-family: 'Permanent Marker', cursive;
 }
