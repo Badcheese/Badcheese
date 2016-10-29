@@ -10,7 +10,7 @@ class Board extends React.Component {
     super(props);
     this.state = {
       draw: null
-    }
+    };
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Board extends React.Component {
     socket.emit('addMeToRoom', currentRoom);
 
     const drawer = initDrawer();
-    this.setState({ draw: drawer })
+    this.setState({ draw: drawer });
     const render = Render('draw-canvas', drawer);
 
     var loadChange = function loadChange(serverData) {
@@ -81,7 +81,7 @@ class Board extends React.Component {
   }
   render() {
     const container = {
-      marginLeft: '30%',
+      marginLeft: '10%',
       paddingLeft: 30,
 
       position: 'fixed'
@@ -99,17 +99,20 @@ class Board extends React.Component {
       marginLeft: '-25px',
       color: 'red'
     };
+    const header = {
+      margin: '0 0 0 0'
+    };
 
     return (
       <div>
-        <h1>Drawmie</h1>
+        <h1 style={header}><a href="/">Drawmie</a></h1>
         <div>
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />
           </div>
             <Nav style={nav}/>
           <div className="container-fluid" style={container} >
-            <canvas id="draw-canvas" style={canvas} ref="canvas" width={500} height={500} />
+            <canvas id="draw-canvas" style={canvas} ref="canvas" width={window.document.body.offsetWidth * .80} height={window.document.body.offsetHeight * .77} />
           </div>
         </div>
       </div>
