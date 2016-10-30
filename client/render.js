@@ -175,7 +175,8 @@ var Render = function Render(canvasId, drawer) {
       color: drawer.data.color,
       shapes: drawer.data.shapes,
       currShape: drawer.data.currentShape,
-      remoteShapes: drawer.data.remoteShapes
+      remoteShapes: drawer.data.remoteShapes,
+      modifiedShape: drawer.data.modifiedShape
     };
 
     addBackground(localData);
@@ -184,6 +185,15 @@ var Render = function Render(canvasId, drawer) {
       var shape = localData.shapes[shapeKey];
 
       if (!shape) {
+        continue;
+      }
+
+      var currShape = localData.currShape;
+      var modifiedShape = localData.modifiedShape;
+      if (currShape && currShape.guid === shape.guid) {
+        continue;
+      }
+      if (modifiedShape && modifiedShape.guid === shape.guid) {
         continue;
       }
 
@@ -209,6 +219,19 @@ var Render = function Render(canvasId, drawer) {
         box(currShape);
       } else if (currShape.type === VECTOR) {
         vector(currShape);
+      }
+    }
+
+    var modifiedShape = localData.modifiedShape;
+    if (modifiedShape) {
+      if (modifiedShape.type === CIRCLE) {
+        circle(modifiedShape);
+      } else if (modifiedShape.type === LINE) {
+        line(modifiedShape);
+      } else if (modifiedShape.type === BOX) {
+        box(modifiedShape);
+      } else if (modifiedShape.type === VECTOR) {
+        vector(modifiedShape);
       }
     }
 
