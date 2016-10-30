@@ -3,21 +3,66 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background: #00c6ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, aliceblue , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, aliceblue , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 h1 {
   font-size: 3.5em;
-}
-body {
-  background-color: #3e506d;
+  font-family: 'Permanent Marker', cursive;
+  /*color: white;*/
 }
 
 canvas {
   background-color: aliceblue;
+  border: 1px solid black;
 }
 
 .headers {
-  color:#ffd800;
+  color:white;
+}
+
+.button-black {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+
+.button-blue {
+    color: #fff;
+    background-color: blue;
+    border-color: blue;
+}
+
+.button-yellow {
+    color: black;
+    background-color: yellow;
+    border-color: yellow;
+}
+
+.button-white {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+
+.color-picker {
+  width: 50%;
+  left: 24%;
+  margin: 0 auto;
+}
+
+.button-alice {
+  color: black;
+  background-color: aliceblue;
+  border-color: aliceblue;
+}
+
+.button-purple {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
 }
 
 .drawmie-input {

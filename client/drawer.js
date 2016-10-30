@@ -10,7 +10,7 @@ var initDrawer = function initDrawer() {
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
   var LineTypes = {round: 'round'};
-  var Colors = {black: 'black', red: 'red', blue: 'blue', green: 'green', purple: 'purple', yellow: 'yellow'};
+  var Colors = {black: 'black', red: 'red', blue: 'blue', green: 'green', purple: 'purple', yellow: 'yellow', white: 'white', aliceblue: 'aliceblue'};
 
   //returns 4 digit guid string
   var getGuid = function getGuid() {
