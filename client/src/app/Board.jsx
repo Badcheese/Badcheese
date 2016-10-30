@@ -37,7 +37,7 @@ class Board extends React.Component {
       }
 
       if (serverData.currentShape) {
-        drawer.data.remoteShape = serverData.currentShape;
+        drawer.data.remoteShapes.push(serverData.currentShape);
       }
     };
 

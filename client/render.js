@@ -175,7 +175,7 @@ var Render = function Render(canvasId, drawer) {
       color: drawer.data.color,
       shapes: drawer.data.shapes,
       currShape: drawer.data.currentShape,
-      remoteShape: drawer.data.remoteShape
+      remoteShapes: drawer.data.remoteShapes
     };
 
     addBackground(localData);
@@ -212,18 +212,20 @@ var Render = function Render(canvasId, drawer) {
       }
     }
 
-    var remoteShape = localData.remoteShape;
-    if (remoteShape && (!currShape || remoteShape.guid !== currShape.guid)) {
-      if (remoteShape.type === CIRCLE) {
-        circle(remoteShape);
-      } else if (remoteShape.type === LINE) {
-        line(remoteShape);
-      } else if (remoteShape.type === BOX) {
-        box(remoteShape);
-      } else if (remoteShape.type === VECTOR) {
-        vector(remoteShape);
+    var remoteShapes = localData.remoteShapes;
+    remoteShapes.forEach(function (remoteShape) {
+      if (remoteShape) {
+        if (remoteShape.type === CIRCLE) {
+          circle(remoteShape);
+        } else if (remoteShape.type === LINE) {
+          line(remoteShape);
+        } else if (remoteShape.type === BOX) {
+          box(remoteShape);
+        } else if (remoteShape.type === VECTOR) {
+          vector(remoteShape);
+        }
       }
-    }
+    });
 
     window.requestAnimationFrame(render);
   };

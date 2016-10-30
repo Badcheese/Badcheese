@@ -4,7 +4,8 @@ var initDrawer = function initDrawer() {
     shapes: {},
     currentShape: null,
     newShapes: [],
-    modifiedShape: null
+    modifiedShape: null,
+    remoteShapes: []
   };
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
