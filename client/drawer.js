@@ -46,7 +46,7 @@ var initDrawer = function initDrawer() {
       this.Colors = Colors;
       this.fillColor = null;
       this.strokeColor = Colors.red;
-      this.colorStroke = true;
+      this.colorStroke = 'stroke';
       // keep this last so state is setup to hanlde drawing
       this.addListeners();
     }
@@ -59,12 +59,12 @@ var initDrawer = function initDrawer() {
       this.currentShapeType = type;
     }
 
-    toggleStrokeFill() {
-      this.colorStroke = !this.colorStroke;
+    toggleStrokeFill(type) {
+      this.colorStroke = type;
     }
 
     changeColor(color) {
-      if (this.colorStroke === true) {
+      if (this.colorStroke === 'stroke') {
         this.strokeColor = color;
         this.fillColor = null;
       } else {
