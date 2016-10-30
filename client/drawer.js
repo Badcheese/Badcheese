@@ -101,24 +101,29 @@ var initDrawer = function initDrawer() {
 
       for (var key in this.data.shapes) {
         var shape = this.data.shapes[key];
-        var testX, testY = false;
+        var test = false;
 
         if (shape.type === ShapeTypes.rect && shape.points.length > 1) {
           var p1 = shape.points[0];
           var p2 = shape.points[1];
-          testX = mousePoint.x > p1.x && mousePoint.x < p2.x;
-          testY = mousePoint.y > p1.y && mousePoint.y < p2.y;
+          
+          if (mousePoint.x > p1.x && mousePoint.x < p2.x || mousePoint.x < p1.x && mousePoint.x > p2.x) {
+            if (mousePoint.y > p1.y && mousePoint.y < p2.y || mousePoint.y < p1.y && mousePoint.y > p2.y) {
+              test = true;
+            }
+          }
+
+
         } else if (shape.type === ShapeTypes.circle) {
           // pythagorean theorem
           var center = shape.points[0];
           var a = mousePoint.x - center.x;
           var b = mousePoint.y - center.y;
           var hyp = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-          testX = hyp < shape.radius;
-          testY = hyp < shape.radius;
+          test = hyp < shape.radius;
         }
 
-        if (testX && testY) {
+        if (test) {
           selectedShape = shape;
           break;
         }
