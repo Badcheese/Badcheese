@@ -161,8 +161,9 @@ var initDrawer = function initDrawer() {
         shape.points.push(point);
       }
 
+      shape.done = true;
       this.data.newShapes.push(shape);
-      this.data.currentShape = null;
+      // this.data.currentShape = null;
 
       console.log('SHAPE COUNT: ', this.data.newShapes.length);
     }
