@@ -175,7 +175,8 @@ var Render = function Render(canvasId, drawer) {
       color: drawer.data.color,
       shapes: drawer.data.shapes,
       currShape: drawer.data.currentShape,
-      remoteShape: drawer.data.remoteShape
+      remoteShapes: drawer.data.remoteShapes,
+      modifiedShape: drawer.data.modifiedShape
     };
 
     addBackground(localData);
@@ -184,6 +185,15 @@ var Render = function Render(canvasId, drawer) {
       var shape = localData.shapes[shapeKey];
 
       if (!shape) {
+        continue;
+      }
+
+      var currShape = localData.currShape;
+      var modifiedShape = localData.modifiedShape;
+      if (currShape && currShape.guid === shape.guid) {
+        continue;
+      }
+      if (modifiedShape && modifiedShape.guid === shape.guid) {
         continue;
       }
 
@@ -212,18 +222,33 @@ var Render = function Render(canvasId, drawer) {
       }
     }
 
-    var remoteShape = localData.remoteShape;
-    if (remoteShape && (!currShape || remoteShape.guid !== currShape.guid)) {
-      if (remoteShape.type === CIRCLE) {
-        circle(remoteShape);
-      } else if (remoteShape.type === LINE) {
-        line(remoteShape);
-      } else if (remoteShape.type === BOX) {
-        box(remoteShape);
-      } else if (remoteShape.type === VECTOR) {
-        vector(remoteShape);
+    var modifiedShape = localData.modifiedShape;
+    if (modifiedShape) {
+      if (modifiedShape.type === CIRCLE) {
+        circle(modifiedShape);
+      } else if (modifiedShape.type === LINE) {
+        line(modifiedShape);
+      } else if (modifiedShape.type === BOX) {
+        box(modifiedShape);
+      } else if (modifiedShape.type === VECTOR) {
+        vector(modifiedShape);
       }
     }
+
+    var remoteShapes = localData.remoteShapes;
+    remoteShapes.forEach(function (remoteShape) {
+      if (remoteShape) {
+        if (remoteShape.type === CIRCLE) {
+          circle(remoteShape);
+        } else if (remoteShape.type === LINE) {
+          line(remoteShape);
+        } else if (remoteShape.type === BOX) {
+          box(remoteShape);
+        } else if (remoteShape.type === VECTOR) {
+          vector(remoteShape);
+        }
+      }
+    });
 
     window.requestAnimationFrame(render);
   };

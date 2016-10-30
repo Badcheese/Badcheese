@@ -4,12 +4,25 @@ var initDrawer = function initDrawer() {
     shapes: {},
     currentShape: null,
     newShapes: [],
-    modifiedShape: null
+    modifiedShape: null,
+    remoteShapes: []
   };
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
   var LineTypes = {round: 'round'};
   var Colors = {black: 'black', red: 'red', blue: 'blue', green: 'green', purple: 'purple', yellow: 'yellow'};
+
+  //returns 4 digit guid string
+  var getGuid = function getGuid() {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    var codes = [0, 0, 0, 0];
+
+    codes = codes.map(function (code) {
+      return chars[Math.floor(Math.random() * chars.length)];
+    });
+
+    return codes.join('');
+  };
 
   class Point {
     constructor(x, y) {
@@ -28,6 +41,7 @@ var initDrawer = function initDrawer() {
       this.lineCap = LineTypes.round;
       this.strokeColor = strokeColor;
       this.fillColor = fillColor;
+      this.guid = getGuid();
     }
   }
 
@@ -166,8 +180,9 @@ var initDrawer = function initDrawer() {
         shape.points.push(point);
       }
 
+      shape.done = true;
       this.data.newShapes.push(shape);
-      this.data.currentShape = null;
+      // this.data.currentShape = null;
 
       console.log('SHAPE COUNT: ', this.data.newShapes.length);
     }
