@@ -9,6 +9,7 @@ class App extends React.Component {
     // This line is important!
   }
   render() {
+
     return (
       <div>
         {function() {

@@ -29,7 +29,7 @@ const Landing = (props) => {
       <Col xs={6} md={4}>
       <div className='drawmie-title'>
         <center>
-          <h1>Drawmie</h1>
+          <h1 className="headers">Drawmie</h1>
           <ButtonToolbar>
           <OverlayTrigger placement="bottom" overlay={tooltip}>
             <Button className="drawmie-button" bsStyle="primary" bsSize="large" onClick={newBoard}>New Drawmie</Button>
