@@ -36,6 +36,11 @@ canvas {
   border: 1px solid black;
 }
 
+a{
+  margin: 200px;
+  color: #681f03;
+}
+
 .headers {
   color:white;
 }

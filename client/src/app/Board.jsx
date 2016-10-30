@@ -106,12 +106,13 @@ class Board extends React.Component {
       position: 'fixed'
     };
     const header = {
-      margin: '0 0 0 0',
+      margin: '200px',
     };
 
     return (
         <div>
-          <h1><a style ={{color: '#6ebcff'}} href='/'>{ `Drawmie ${window.location.hash}` }</a></h1>
+          <h1>Drawmie {window.location.hash}</h1>
+          <h1><a style ={{color: '#681f03'}} href='/'>New Drawmie</a></h1>
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />
           </div>
