@@ -31,13 +31,17 @@ class Board extends React.Component {
       if (serverData.shapes) {
         for (var key in serverData.shapes) {
           var serverShape = serverData.shapes[key];
-          console.log('server shape: ', serverShape.guid);
-          drawer.data.shapes[key] = serverData.shapes[key];
+          drawer.data.shapes[key] = serverShape;
+          drawer.data.remoteShapes = drawer.data.remoteShapes.filter(function(remoteShape) {
+            return remoteShape.guid !== serverShape;
+          });
         }
       }
 
       if (serverData.currentShape) {
-        drawer.data.remoteShapes.push(serverData.currentShape);
+        if (!drawer.data.currentShape || (serverData.currentShape.guid !== drawer.data.currentShape.guid)) {
+          drawer.data.remoteShapes.push(serverData.currentShape);
+        }
       }
     };
 
@@ -66,7 +70,7 @@ class Board extends React.Component {
       loadChange(serverData);
     });
 
-    setInterval(tick, 250);
+    setInterval(tick, 100);
     window.requestAnimationFrame(render);
 
     // socket.on('boardId', function (data) {
