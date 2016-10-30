@@ -111,7 +111,7 @@ class Board extends React.Component {
 
     return (
         <div>
-          <h1>{ `Drawmie ${window.location.hash}` }</h1>
+          <h1><a style ={{color: '#6ebcff'}} href='/'>{ `Drawmie ${window.location.hash}` }</a></h1>
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />
           </div>
