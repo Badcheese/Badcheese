@@ -10,6 +10,18 @@ var initDrawer = function initDrawer() {
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
   var LineTypes = {round: 'round'};
 
+  //returns 4 digit guid string
+  var getGuid = function getGuid() {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    var codes = [0, 0, 0, 0];
+
+    codes = codes.map(function (code) {
+      return chars[Math.floor(Math.random() * chars.length)];
+    });
+
+    return codes.join('');
+  };
+
   class Point {
     constructor(x, y) {
       this.x = x;
@@ -27,6 +39,7 @@ var initDrawer = function initDrawer() {
       this.lineCap = LineTypes.round;
       this.strokeColor = 'blue';
       this.fillColor = null;
+      this.guid = getGuid();
     }
   }
 
