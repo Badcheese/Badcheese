@@ -49,13 +49,6 @@ const Landing = (props) => {
 
   return gridInstance;
 
-
-  // return (
-  //   <center>
-  //     <h1>Drawmie Landing Page</h1>
-  //     <button onClick={newBoard}>New Drawmie</button>
-  //   </center>
-  // );
 };
 
 module.exports = Landing;

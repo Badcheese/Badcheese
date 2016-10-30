@@ -1,6 +1,5 @@
 import React from 'react';
 import ToolBar from './Toolbar.jsx';
-// import Nav from './Nav.jsx';
 import Render from '../../render.js';
 import initDrawer from '../../drawer.js';
 
@@ -96,11 +95,9 @@ class Board extends React.Component {
     const container = {
       marginLeft: '10%',
       paddingLeft: 30,
-
       position: 'fixed'
     };
     const canvas = {
-
       borderRadius: '5px',
     };
     const tools = {
@@ -108,10 +105,6 @@ class Board extends React.Component {
       marginTop: '85px',
       position: 'fixed'
     };
-    // const nav = {
-    //   // marginLeft: '-25px',
-    //   color: 'red'
-    // };
     const header = {
       margin: '0 0 0 0',
     };
@@ -122,7 +115,6 @@ class Board extends React.Component {
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />
           </div>
-            {/* <Nav /> */}
           <div className="container-fluid" style={container} >
             <canvas id="draw-canvas" style={canvas} ref="canvas" width={window.document.body.offsetWidth * .80} height={window.document.body.offsetHeight * .77} />
           </div>
