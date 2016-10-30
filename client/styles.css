@@ -3,10 +3,26 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207)) 0% 0% / 300% 300%;
+  animation: animation 30s ease infinite;
+  -webkit-animation: animation 30s ease infinite;
+  -moz-animation: animation 30s ease infinite;
+}
 
-  background: #fc00ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #fc00ff , #00dbde); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #fc00ff , #00dbde); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+@-webkit-keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 h1 {
