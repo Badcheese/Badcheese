@@ -1,19 +1,42 @@
 import React from 'react';
+import { ButtonGroup, Button } from 'react-bootstrap';
 
-// <a onClick={function() { this.state.draw.changeShapeType(this.state.draw.ShapeTypes.rect); }.bind(this)} href='#'>Rect</a>
 
 var ToolBar = ({ draw }) => (
-  <nav className="toolbar">
-    <div className="container">
-      <ul className="toolList" id="tools">
-        <li className="tools" onClick={() => draw.toggleIsSelecting()}>Selector</li>
-        <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.rect)}>Rect</li>
-        <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.line)}>Line</li>
-        <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.circle)}>Circle</li>
-        <li className="tools" onClick={() => draw.changeShapeType(draw.ShapeTypes.path)}>Path</li>
-      </ul>
+  <div>
+    <div>
+      <ButtonGroup vertical>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.toggleIsSelecting()}>Selector</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeShapeType(draw.ShapeTypes.rect)}>Rect</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeShapeType(draw.ShapeTypes.line)}>Line</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeShapeType(draw.ShapeTypes.circle)}>Circle</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeShapeType(draw.ShapeTypes.path)}>Path</Button>
+      </ButtonGroup>
     </div>
-  </nav>
+    <div>
+      <ButtonGroup vertical>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.toggleStrokeFill('stroke')}>Stroke</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.toggleStrokeFill('fill')}>Fill</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeColor(draw.Colors.black)}>Black</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeColor(draw.Colors.red)}>Red</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeColor(draw.Colors.yellow)}>Yellow</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeColor(draw.Colors.green)}>Green</Button>
+        <Button className="tools" bsSize="large"
+                onClick={() => draw.changeColor(draw.Colors.purple)}>Purple</Button>
+      </ButtonGroup>
+    </div>
+  </div>
 );
 
 export default ToolBar;

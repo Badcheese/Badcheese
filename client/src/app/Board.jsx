@@ -87,11 +87,6 @@ class Board extends React.Component {
     setInterval(tick, 100);
     window.requestAnimationFrame(render);
 
-    // socket.on('boardId', function (data) {
-    //   console.log(data);
-    //   socket.emit('clientDrawing', { clientSays: 'this message came through socket.io' });
-    // });
-
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
@@ -105,7 +100,7 @@ class Board extends React.Component {
       position: 'fixed'
     };
     const canvas = {
-      border: '15px solid gray',
+      
       borderRadius: '5px',
     };
     const tools = {
@@ -118,12 +113,13 @@ class Board extends React.Component {
       color: 'red'
     };
     const header = {
-      margin: '0 0 0 0'
+      margin: '0 0 0 0',
+      color: '#ffd800'
     };
 
     return (
       <div>
-        <h1 style={header}><a href="/">Drawmie</a></h1>
+        <h1><a style={header} href="/">New Drawmie</a></h1>
         <div>
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />
