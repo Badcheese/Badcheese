@@ -7,6 +7,7 @@ var Render = function Render(canvasId, drawer) {
   const c = document.getElementById(id).getContext('2d');
   const height = c.canvas.height;
   const width = c.canvas.width;
+  var lastRender;
 
   // {
   //   type: 'circle', //required STRING
@@ -98,30 +99,10 @@ var Render = function Render(canvasId, drawer) {
     c.beginPath();
     addStyle(shape);
 
-
     var x0 = shape.points[0].x;
     var y0 = shape.points[0].y;
     var x2 = shape.points[1].x;
     var y2 = shape.points[1].y;
-    var x1, y1, x3, y3;
-
-    shape.alpha ? 0 : shape.alpha = 0;
-
-    // var a = x2 - x0;
-    // var b = y2 - y0;
-    // var theta = Math.atan(b / a) + shape.alpha;
-    // var rad = Math.sqrt(Math.pow(x2 - x0, 2) + Math.pow(y2 - y0, 2));
-    // var x = (x0 + x2) / 2;
-    // var y = (y0 + y2) / 2;
-    // x0 = x - rad / 2 * Math.cos(theta);
-    // x1 = x - rad / 2 * Math.cos(theta + Math.PI);
-    // x2 = x + rad / 2 * Math.cos(theta);
-    // x3 = x + rad / 2 * Math.cos(theta + Math.PI);
-    // y0 = y - rad / 2 * Math.sin(theta);
-    // y1 = y - rad / 2 * Math.sin(theta + Math.PI);
-    // y2 = y + rad / 2 * Math.sin(theta);
-    // y3 = y + rad / 2 * Math.sin(theta + Math.PI);
-
 
     c.moveTo(x0, y0);
     c.lineTo(x0, y2);
@@ -164,6 +145,18 @@ var Render = function Render(canvasId, drawer) {
       c.lineWidth = 1;
     }
   };
+
+  var areEqual = function areEqual(a, b) {
+    return JSON.stringify(a) === b;
+  };
+
+  var noChange = function noChange(data) {
+    if (areEqual(data, lastRender)) {
+      return true;
+    }
+    lastRender = JSON.stringify(data);
+    return false;
+  };
   
   // the render function takes in a data object.
   // Data has a shapes property which is an array
@@ -178,6 +171,10 @@ var Render = function Render(canvasId, drawer) {
       remoteShapes: drawer.data.remoteShapes,
       modifiedShape: drawer.data.modifiedShape
     };
+
+    if (noChange(localData)) {
+      return window.requestAnimationFrame(render);
+    }
 
     addBackground(localData);
 
