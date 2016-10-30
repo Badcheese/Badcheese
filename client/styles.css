@@ -8,9 +8,15 @@ html, body {
 h1 {
   font-size: 3.5em;
 }
+body {
+  background-color: #3e506d;
+}
 
 canvas {
   background-color: aliceblue;
+}
+.headers {
+  color:#ffd800;
 }
 
 .drawmie-input {
