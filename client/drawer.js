@@ -9,6 +9,7 @@ var initDrawer = function initDrawer() {
 
   var ShapeTypes = {line: 'line', path: 'path', rect: 'rect', circle: 'circle'};
   var LineTypes = {round: 'round'};
+  var Colors = {black: 'black', red: 'red', blue: 'blue', green: 'green', purple: 'purple', yellow: 'yellow'};
 
   class Point {
     constructor(x, y) {
@@ -18,15 +19,15 @@ var initDrawer = function initDrawer() {
   }
 
   class Shape {
-    constructor(type, points) {
+    constructor(type, points, strokeColor, fillColor) {
       this.type = type;
       this.points = points;
       this.radius = 0;
       this.lineWidth = 2;
       this.lineJoin = LineTypes.round;
       this.lineCap = LineTypes.round;
-      this.strokeColor = 'blue';
-      this.fillColor = null;
+      this.strokeColor = strokeColor;
+      this.fillColor = fillColor;
     }
   }
 
@@ -42,6 +43,10 @@ var initDrawer = function initDrawer() {
       this.isSelecting = false;
       this.ShapeTypes = ShapeTypes;
       this.LineTypes = LineTypes;
+      this.Colors = Colors;
+      this.fillColor = null;
+      this.strokeColor = Colors.red;
+      this.colorStroke = 'stroke';
       // keep this last so state is setup to hanlde drawing
       this.addListeners();
     }
@@ -52,6 +57,20 @@ var initDrawer = function initDrawer() {
       }
 
       this.currentShapeType = type;
+    }
+
+    toggleStrokeFill(type) {
+      this.colorStroke = type;
+    }
+
+    changeColor(color) {
+      if (this.colorStroke === 'stroke') {
+        this.strokeColor = color;
+        this.fillColor = null;
+      } else {
+        this.fillColor = color;
+        this.strokeColor = null;
+      }
     }
 
     toggleIsSelecting() {
@@ -164,7 +183,9 @@ var initDrawer = function initDrawer() {
       }
 
       var points = [mousePoint];
-      this.data.currentShape = new Shape(this.currentShapeType, points);
+      this.data.currentShape = new Shape(this.currentShapeType, points,
+        this.strokeColor, this.fillColor);
+
       // this.shapes.push(this.currentShape);
     }
 
