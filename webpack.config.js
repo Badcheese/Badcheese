@@ -13,7 +13,7 @@ var config = {
     filename: 'bundle.js'
   },
   resolve: {
-    extenstions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   externals: {
     'cheerio':
