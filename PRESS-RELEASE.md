@@ -1,8 +1,6 @@
 # Badcheese
-🧀 The badest of the bad, the cheesiest of the cheese 🧀
 
-
-## 🧀
+## 🧀 The badest of the bad, the cheesiest of the cheese 🧀
 Drawmie was designed to make sharing visual ideas 
 easier.
 
@@ -16,14 +14,14 @@ collaborate on new ideas in real-time.
 ## Solution ##
 Drawmie is that world. One 'drawing board' to rule them all. Shared in real-time.
 
+## How to Get Started ##
+Go to http://54.201.70.229:3000/ in your favorite browser. Click 'New Drawmie'. 
+Share the the URL or Drawmie ID with your BFF's. Now Draw!!
+
 ## Quote from the team ##
 > "Drawmie is so sick it needs medicine"
 
 __Nick Lathen__
-
-## How to Get Started ##
-Go to http://54.201.70.229:3000/ in your favorite browser. Click 'New Drawmie'. 
-Share the the URL or Drawmie ID with your BFF's. Now Draw!!
 
 ## Customer Quote ##
 >"I made DOPE art with my bro's and we crushed some massive amounts of Cap'n Crunch. Twas Sick"
