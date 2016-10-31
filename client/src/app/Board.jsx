@@ -55,7 +55,18 @@ class Board extends React.Component {
           drawer.data.remoteShapes = drawer.data.remoteShapes.filter(function (remoteShape) {
             return remoteShape.guid !== serverData.currentShape.guid;
           });
-          drawer.data.remoteShapes.push(serverData.currentShape);
+          var async = false;
+          for (var key in drawer.data.shapes) {
+            var shape = drawer.data.shapes[key];
+            if (shape.guid === serverData.currentShape.guid) {
+              console.log('async detected');
+              async = true;
+            }
+          }
+          if (async === false) {
+            drawer.data.remoteShapes.push(serverData.currentShape);
+          }
+          async = false;
         }
       }
     };
