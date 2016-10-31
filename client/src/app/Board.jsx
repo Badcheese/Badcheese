@@ -59,9 +59,12 @@ class Board extends React.Component {
           for (var key in drawer.data.shapes) {
             var shape = drawer.data.shapes[key];
             if (shape.guid === serverData.currentShape.guid) {
-              console.log('async detected');
+              // console.log('async detected');
               async = true;
             }
+            drawer.data.remoteShapes = drawer.data.remoteShapes.filter(function (remoteShape) {
+              return remoteShape.guid !== shape.guid;
+            });
           }
           if (async === false) {
             drawer.data.remoteShapes.push(serverData.currentShape);
