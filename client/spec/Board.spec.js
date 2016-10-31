@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import Board from '../src/app/Board';
 
 describe('<Board />', function () {
-  it('renders one <Toolbar /> components', () => {
+  it('renders a <Toolbar /> component', () => {
     const wrapper = shallow(<Board />);
     expect(wrapper.find('ToolBar')).to.have.length(1);
   });
