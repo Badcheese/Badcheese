@@ -14,4 +14,9 @@ describe('<Board />', function () {
     const wrapper = shallow(<Board />);
     expect(wrapper.find('canvas')).to.have.length(1);
   });
+  it('should have draw state', function () {
+    const wrapper = shallow(<Board />);
+    wrapper.setState({draw: 'we got state'});
+    expect(wrapper.state()).to.be.defined;
+  });
 });
