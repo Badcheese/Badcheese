@@ -126,6 +126,8 @@ var initDrawer = function initDrawer() {
 
         if (test) {
           selectedShape = shape;
+          selectedShape.offsetX = a;
+          selectedShape.offsetY = b;
           break;
         }
       }
@@ -151,7 +153,8 @@ var initDrawer = function initDrawer() {
         p2.x = mousePoint.x + width;
         p2.y = mousePoint.y + height;
       } else if (shape.type === ShapeTypes.circle) {
-        shape.points[0] = mousePoint;
+        shape.points[0].x = mousePoint.x - shape.offsetX;
+        shape.points[0].y = mousePoint.y - shape.offsetY;
       }
     }
 
