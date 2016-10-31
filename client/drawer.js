@@ -180,6 +180,9 @@ var initDrawer = function initDrawer() {
       this.isDrawing = false;
 
       if (this.isSelecting) {
+        if (this.data.modifiedShape) {
+          this.data.modifiedShape.done = true;
+        }
         return;
       }
 

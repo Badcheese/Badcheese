@@ -35,10 +35,16 @@ class Board extends React.Component {
             return remoteShape.guid !== serverShape.guid;
           });
           if (serverShape.done) {
+            drawer.data.updates ? 0 : drawer.data.updates = [];
             if (drawer.data.currentShape && (serverShape.guid === drawer.data.currentShape.guid)) {
               drawer.data.currentShape = null;
               serverShape.done = undefined;
-              drawer.data.update = serverShape;
+              drawer.data.updates.push(serverShape);
+            }
+            if (drawer.data.modifiedShape && (serverShape.guid === drawer.data.modifiedShape.guid)) {
+              drawer.data.modifiedShape = null;
+              serverShape.done = undefined;
+              drawer.data.updates.push(serverShape);
             }
           }
         }
@@ -60,9 +66,14 @@ class Board extends React.Component {
       if (drawer.data.modifiedShape) {
         shapes[drawer.data.modifiedShape.id] = drawer.data.modifiedShape;
       }
-      if (drawer.data.update) {
-        shapes[drawer.data.update.id] = drawer.data.update;
-        drawer.data.update = undefined;
+      if (drawer.data.updates) {
+        
+        drawer.data.updates.forEach(function(update) {
+          shapes[update.id] = update;
+        });
+        
+
+        drawer.data.updates = [];
       }
 
       var myDraw = {
