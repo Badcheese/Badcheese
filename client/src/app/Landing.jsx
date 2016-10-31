@@ -23,12 +23,13 @@ const Landing = (props) => {
   const tooltip = (
   <Tooltip id="tooltip"><strong>Start a new Drawmie!</strong></Tooltip>
 );
-{/* this is an instance of a react-boostrap Grid component */}
+
+  // Bootstrap Grid Component
   const gridInstance = (
   <Grid>
     <Row className="show-grid">
       <Col xs={6} md={4}></Col>
-      <Col xs={6} md={4}>
+      <Col xs={6} md={4} className='mid-grid'>
       <div className='drawmie-title'>
         <center>
           <h1 className="headers">Drawmie</h1>
