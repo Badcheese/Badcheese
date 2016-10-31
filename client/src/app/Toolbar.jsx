@@ -19,7 +19,7 @@ var ToolBar = ({ draw }) => (
         <center><h5>Shape</h5></center>
         <ButtonGroup vertical>
           <Button className="tools" bsSize="large"
-            onClick={() => draw.toggleIsSelecting()}>Drag</Button>
+            onClick={() => draw.enableIsSelecting()}>Drag</Button>
           <Button className="tools" bsSize="large"
             onClick={() => draw.changeShapeType(draw.ShapeTypes.rect)}>Rect</Button>
           <Button className="tools" bsSize="large"
