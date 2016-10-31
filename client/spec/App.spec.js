@@ -1,4 +1,5 @@
 import React from 'react';
+// shallow is important it makes sure your test only tests intended component and not it's children
 import { mount, shallow, render } from 'enzyme';
 import {expect} from 'chai';
 import App from '../src/app/App';

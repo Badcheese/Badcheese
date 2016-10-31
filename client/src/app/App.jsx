@@ -6,10 +6,9 @@ import Board from './Board.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // This line is important!
   }
   render() {
-
+    // if no room/"hash" is chosen renders landing page otherwise renders board
     return (
       <div>
         {function() {
