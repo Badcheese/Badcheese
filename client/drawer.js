@@ -126,8 +126,16 @@ var initDrawer = function initDrawer() {
 
         if (test) {
           selectedShape = shape;
-          selectedShape.offsetX = a;
-          selectedShape.offsetY = b;
+
+          if (selectedShape.type === ShapeTypes.circle) {
+            selectedShape.offsetX = a;
+            selectedShape.offsetY = b;
+          }
+          if (selectedShape.type === ShapeTypes.rect) {
+            selectedShape.offsetX = mousePoint.x - p1.x;
+            selectedShape.offsetY = mousePoint.y - p1.y;
+          }
+          
           break;
         }
       }
@@ -148,10 +156,10 @@ var initDrawer = function initDrawer() {
         var width = p2.x - p1.x;
         var height = p2.y - p1.y;
 
-        p1.x = mousePoint.x;
-        p1.y = mousePoint.y;
-        p2.x = mousePoint.x + width;
-        p2.y = mousePoint.y + height;
+        p1.x = mousePoint.x - shape.offsetX;
+        p1.y = mousePoint.y - shape.offsetY;
+        p2.x = p1.x + width;
+        p2.y = p1.y + height;
       } else if (shape.type === ShapeTypes.circle) {
         shape.points[0].x = mousePoint.x - shape.offsetX;
         shape.points[0].y = mousePoint.y - shape.offsetY;
