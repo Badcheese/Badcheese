@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-const Form = React.createClass({
-  getInitialState() {
-    return {
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    // This line is important!
+    this.state = {
       value: ''
-    };
-  },
+    }
+  }
 
   getValidationState() {
     const length = this.state.value.length;
@@ -16,11 +18,11 @@ const Form = React.createClass({
     } else if (length > 4) {
       return 'warning';
     }
-  },
+  }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
-  },
+    this.setState({ value: e.target.value }, ()=> window.location.hash = this.state.value);
+  }
 
   render() {
     return (
@@ -29,19 +31,18 @@ const Form = React.createClass({
           controlId="formBasicText"
           validationState={this.getValidationState()}
         >
-          {/* <ControlLabel>Some Text can go here</ControlLabel> */}
           <FormControl
             type="text"
             value={this.state.value}
             className="drawmie-input"
             placeholder="Enter ID"
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(this)}
           />
-          <FormControl.Feedback />
+          <FormControl.Feedback /> 
         </FormGroup>
       </form>
     );
   }
-});
+}
 
 export default Form;
