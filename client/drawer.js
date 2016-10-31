@@ -75,6 +75,7 @@ var initDrawer = function initDrawer() {
 
     toggleStrokeFill(type) {
       this.colorStroke = type;
+      this.changeColor(this.strokeColor || this.fillColor);
     }
 
     changeColor(color) {
