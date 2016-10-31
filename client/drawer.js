@@ -276,7 +276,7 @@ var initDrawer = function initDrawer() {
       this.canvas.addEventListener('mouseup',
         this.handleMouseUp.bind(this));
       this.canvas.addEventListener('mouseout',
-        function () { this.isDrawing = false; }.bind(this));
+        this.handleMouseUp.bind(this));
       this.canvas.addEventListener('mousemove',
         this.handleMouseMove.bind(this));
     }
