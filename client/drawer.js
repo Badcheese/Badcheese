@@ -88,12 +88,21 @@ var initDrawer = function initDrawer() {
       }
     }
 
+    enableIsSelecting() {
+      this.isSelecting = true;
+      this.canvas.style.cursor = 'pointer';
+    }
+
+    disableIsSelecting() {
+      this.isSelecting = false;
+      this.canvas.style.cursor = 'default';
+    } 
+
     toggleIsSelecting() {
-      this.isSelecting = !this.isSelecting;
       if (this.isSelecting) {
-        this.canvas.style.cursor = 'pointer';
+        this.disableIsSelecting();
       } else {
-        this.canvas.style.cursor = 'default';
+        this.enableIsSelecting();
       }
     }
 
