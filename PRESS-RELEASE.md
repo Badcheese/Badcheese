@@ -4,33 +4,31 @@
 Drawmie
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  Drawmie was designed to make sharing visual ideas easier and more fluid for creative types on weed.
+Drawmie was designed to make sharing visual ideas 
+easier and more fluid for creative types on weed.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  Drawmie is a collaborative whiteboarding app
+Drawmie is a collaborative drawing app. Using the cloud and advanced socket technology it facilitates multi-user real-time awesomeness that is truly DOPE. Users can share boards, save them for future reference and advance to new levels of creative enlightenment.
 
 ## Problem ##
-  > Describe the problem your product solves.
-  Two or more people need to quickly share visual ideas.
+Imagine if you will a world where people in disparate locales have the need to visually
+collaborate on new ideas in real-time.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-  Drawmie enables multiple users to 
+Drawmie is that world. One 'drawing board' to rule them all. Shared in real-time.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
-  "Drawmie is so sick it needs medicine" - Nick Lathen
+"Drawmie is so sick it needs medicine" 
+- Nick Lathen
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-Go to http://54.201.70.229:3000/ in your favorite browser. Click 'New Drawmie'. You will be taken to a new Drawmie whiteboard where you can draw lots of cute pictures with your friends. To collaborate with your BFF share the the URL or Drawmie ID. Now Draw!!
+Go to http://54.201.70.229:3000/ in your favorite browser. Click 'New Drawmie'. 
+Share the the URL or Drawmie ID with your BFF's. Now Draw!!
 
 ## Customer Quote ##
 "I made DOPE art with my bro's and we crushed 
 some massive amounts of Cap'n Crunch. Twas Sick" 
-  - Anonymous Dude
+- Anonymous Dude
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+Go to http://54.201.70.229:3000/ TODAY. BUY NOW!!!
