@@ -9,6 +9,7 @@ module.exports = {
 
   getNewBoard: (req, res, next) => {
     const newId = util.doGenerateNewId();
+    console.log(`Creating new board with id: #${newId}`);
     util.doGetNewBoard(newId);
     res.json(newId);
   },
