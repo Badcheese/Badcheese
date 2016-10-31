@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Grid, Row, Col, Clearfix, Button, Panel, Tooltip, ButtonToolbar, OverlayTrigger} from 'react-bootstrap';
+// this is how you import react-bootstrap components
+import { Grid, Row, Col, Clearfix, Button, Panel, Tooltip, ButtonToolbar, OverlayTrigger } from 'react-bootstrap';
 import Form from './LandingForm.jsx';
 
+// vanilla ajax request to setup the board with the server
 const Landing = (props) => {
   const origin = window.location.origin;
   const App = props.App;
@@ -21,7 +23,7 @@ const Landing = (props) => {
   const tooltip = (
   <Tooltip id="tooltip"><strong>Start a new Drawmie!</strong></Tooltip>
 );
-
+{/* this is an instance of a react-boostrap Grid component */}
   const gridInstance = (
   <Grid>
     <Row className="show-grid">
@@ -31,12 +33,11 @@ const Landing = (props) => {
         <center>
           <h1 className="headers">Drawmie</h1>
           <ButtonToolbar>
-          <OverlayTrigger placement="bottom" overlay={tooltip}>
-            <Button className="drawmie-button" bsStyle="primary" bsSize="large" onClick={newBoard}>New Drawmie</Button>
+          <OverlayTrigger placement="bottom" overlay={ tooltip }>
+            <Button className="drawmie-button" bsStyle="primary" bsSize="large" onClick={ newBoard }>New Drawmie</Button>
           </OverlayTrigger>
           </ButtonToolbar>
         </center>
-
         <Panel className="drawmie-join" header='Join A Drawmie'>
           <Form />
         </Panel>

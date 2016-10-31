@@ -112,6 +112,7 @@ class Board extends React.Component {
     window.requestAnimationFrame(render);
 
   }
+  
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.clearRect(0, 0, 750, 1000);
@@ -136,7 +137,9 @@ class Board extends React.Component {
 
     return (
         <div>
+          {/* window hash determines what room the user is in. Here that room gets displayed on the page */}
           <h1>Drawmie {window.location.hash}</h1>
+          {/* this tag takes you back to the landing page */}
           <h1><a style ={{color: '#681f03'}} href='/'>New Drawmie</a></h1>
           <div className="container-fluid" style={tools}>
             <ToolBar draw={ this.state.draw } />

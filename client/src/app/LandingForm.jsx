@@ -5,7 +5,6 @@ import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    // This line is important!
     this.state = {
       value: ''
     }
@@ -19,7 +18,7 @@ class Form extends React.Component {
       return 'warning';
     }
   }
-
+  // this function resets the state to the input value then sets the window hash to the state value or the room
   handleChange(e) {
     this.setState({ value: e.target.value }, ()=> window.location.hash = this.state.value);
   }

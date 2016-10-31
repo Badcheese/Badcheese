@@ -1,9 +1,10 @@
 import React from 'react';
+// this is how you import react-bootstrap components
 import { ButtonGroup, Button } from 'react-bootstrap';
 
 const wellStyles = {maxWidth: 250, margin: '0 auto 10px'};
 
-
+// toolBar uses react-bootstrap for the ButtonGroup vert styleeze
 var ToolBar = ({ draw }) => (
   <div>
     <div className="well" style={wellStyles}>
