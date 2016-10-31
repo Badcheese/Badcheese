@@ -125,7 +125,7 @@ var Render = function Render(canvasId, drawer) {
       c.strokeStyle = 'black';
     }
     if (shape.fillColor) {
-      c.fillStyle = shape.fillColor;
+      c.strokeStyle = c.fillStyle = shape.fillColor;
     } else {
       c.fillStyle = 'black';
     }
