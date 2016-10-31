@@ -1,6 +1,6 @@
-Drawmie
+# Drawmie
 
-A collaborative drawing tool for you hippsters.
+A fun collaborative drawing tool
 
 ## Team
 
@@ -10,21 +10,20 @@ A collaborative drawing tool for you hippsters.
 
 ## Table of Contents
 
+1. [Team](#team)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+    1. [Dependencies](#dependencies)
 1. [Contributing](#contributing)
 
 ## Usage
 
 After starting the server (see below) load http://localhost:3000 in your favorite 
-browser software device. Please click on the button labeled: 'New Drawmie'.
+browser software device (preferably Google Chrome). Please click on the button labeled: 'New Drawmie'.
 You will be taken to a new Drawmie whiteboard where you can draw lots of cute
-pictures with your friends. To collaborate share you Drawmie Id with your BFF.
-Copy the the URL or Drawmie Id and send it to the MoFo. Now Draw!!
+pictures with your friends. To collaborate with your BFF share the the URL or Drawmie ID.
+Now Draw!!
 
 
 ## Requirements
@@ -32,14 +31,14 @@ Copy the the URL or Drawmie Id and send it to the MoFo. Now Draw!!
 - Node
 - Webpack
 
-### Installing Dependencies
+### Dependencies
 
 From within the root directory:
 
 ```sh
-npm install
-webpack
-nodemon server/server.js
+$ npm install
+$ webpack
+$ nodemon server/server.js
 ```
 
 ### Roadmap
