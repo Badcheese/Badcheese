@@ -127,7 +127,7 @@ class Board extends React.Component {
     };
     const tools = {
       listStyleType: 'none',
-      marginTop: '85px',
+      marginTop: '0px',
       position: 'fixed'
     };
     const header = {
