@@ -3,7 +3,6 @@ import ToolBar from './Toolbar.jsx';
 import Render from '../../render.js';
 import initDrawer from '../../drawer.js';
 
-
 class Board extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +10,7 @@ class Board extends React.Component {
       draw: null
     };
   }
-
+  // when component mounts board gets created and drawer gets initiated and set to state
   componentDidMount() {
     this.updateCanvas();
     const currentRoom = window.location.hash.slice(1);
