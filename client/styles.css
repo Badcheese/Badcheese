@@ -1,0 +1,113 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207)) 0% 0% / 300% 300%;
+  animation: animation 30s ease infinite;
+  -webkit-animation: animation 30s ease infinite;
+  -moz-animation: animation 30s ease infinite;
+}
+
+@-webkit-keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+h1 {
+  font-size: 3.5em;
+  font-family: 'Permanent Marker', cursive;
+  /*color: white;*/
+}
+
+canvas {
+  background-color: aliceblue;
+  border: 1px solid black;
+}
+
+a{
+  margin: 200px;
+  color: #681f03;
+}
+
+.mid-grid {
+  margin-top: 20%;
+}
+
+.headers {
+  color:white;
+}
+
+.button-black {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+
+.button-blue {
+    color: #fff;
+    background-color: blue;
+    border-color: blue;
+}
+
+.button-yellow {
+    color: black;
+    background-color: yellow;
+    border-color: yellow;
+}
+
+.button-white {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+
+.color-picker {
+  width: 50%;
+  left: 24%;
+  margin: 0 auto;
+}
+
+.button-alice {
+  color: black;
+  background-color: aliceblue;
+  border-color: aliceblue;
+}
+
+.button-purple {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
+}
+
+.drawmie-input {
+  text-align: center;
+}
+
+.btn-toolbar>.btn, .btn-toolbar>.btn-group, .btn-toolbar>.input-group {
+  margin-left: 105px !important;
+}
+
+.drawmie-join {
+  margin-top: 25%;
+}
+
+.drawmie-button {
+  margin-top: 10%;
+  margin-left: 10%
+}
+
+.drawmie-title {
+  font-family: 'Permanent Marker', cursive;
+}
